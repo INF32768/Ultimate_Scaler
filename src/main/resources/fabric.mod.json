@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "ultimatescaler",
+  "version": "${version}",
+
+  "name": "Ultimate Scaler",
+  "description": "A Minecraft mod for scale the terrain generation.",
+  "authors": [
+    "INF32768"
+  ],
+  "contact": {
+    "homepage": "https://github.com/INF32768/UltimateScaler",
+    "sources": "https://github.com/INF32768/UltimateScaler",
+    "issues": "https://github.com/INF32768/UltimateScaler/issues"
+  },
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.inf32768.ultimatescaler.UltimateScaler"
+    ],
+    "modmenu": [
+      "me.inf32768.ultimatescaler.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "mixins.ultimatescaler.json"
+  ],
+  "accessWidener": "ultimatescaler.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.16.7",
+    "cloth-config2": "*",
+    "fabric": "*",
+    "minecraft": ">=1.21.2"
+  }
+}

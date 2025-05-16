@@ -1,0 +1,14 @@
+{
+  "commands.locate.pos.not_found": "无法在给定的范围内找到该坐标",
+  "commands.locate.pos.range_negative": "范围不能为负数",
+  "commands.locate.pos.range_too_large": "范围过大，请缩小范围",
+  "commands.locate.pos.scale_invalid": "缩放必须为正数",
+  "commands.locate.pos.success": "找到坐标： %s",
+  "text.autoconfig.ultimatescaler.option.globalXOffset": "全局 X 坐标偏移",
+  "text.autoconfig.ultimatescaler.option.globalXScale": "全局 X 坐标缩放",
+  "text.autoconfig.ultimatescaler.option.globalYOffset": "全局 Y 坐标偏移",
+  "text.autoconfig.ultimatescaler.option.globalYScale": "全局 Y 坐标缩放",
+  "text.autoconfig.ultimatescaler.option.globalZOffset": "全局 Z 坐标偏移",
+  "text.autoconfig.ultimatescaler.option.globalZScale": "全局 Z 坐标缩放",
+  "text.autoconfig.ultimatescaler.title": "世界偏移设置"
+}

@@ -1,0 +1,21 @@
+{
+  "required": false,
+  "package": "me.inf32768.ultimatescaler.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "ultimatescaler-refmap.json",
+  "mixins": [
+    "MixinChunkPos",
+    "MixinInterpolatedNoiseSampler",
+    "MixinNoiseSampler",
+    "MixinShift",
+    "MixinShiftA",
+    "MixinShiftB",
+    "MixinShiftedNoiseSampler"
+  ],
+  "client": [
+    "MixinDebugHud"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

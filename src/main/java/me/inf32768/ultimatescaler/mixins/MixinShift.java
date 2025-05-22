@@ -4,7 +4,7 @@ import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import static me.inf32768.ultimatescaler.UltimateScaler.config;
+import me.inf32768.ultimatescaler.config.WorldGenOptions;
 
 @Mixin(DensityFunctionTypes.Shift.class)
 public abstract class MixinShift implements DensityFunctionTypes.Offset {
@@ -15,6 +15,6 @@ public abstract class MixinShift implements DensityFunctionTypes.Offset {
      */
     @Overwrite
     public double sample(NoisePos pos) {
-        return this.sample((double)pos.blockX() * config.globalXScale + config.globalXOffset, (double)pos.blockY() * config.globalYScale + config.globalYOffset, (double)pos.blockZ() * config.globalZScale + config.globalZOffset) * (double)4.0F;
+        return this.sample((double)pos.blockX() * WorldGenOptions.globalScale[0] + WorldGenOptions.globalOffset[0], (double)pos.blockY() * WorldGenOptions.globalScale[1] + WorldGenOptions.globalOffset[1], (double)pos.blockZ() * WorldGenOptions.globalScale[2] + WorldGenOptions.globalOffset[2]) * (double)4.0F;
     }
 }

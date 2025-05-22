@@ -1,14 +1,13 @@
 {
-  "commands.locate.pos.not_found": "Position not found in given distance",
-  "commands.locate.pos.success": "Found position at %s",
-  "commands.locate.pos.scale_invalid": "Scale must greater than 0",
-  "text.autoconfig.ultimatescaler.option.globalXOffset": "Global X coordinate offset",
-  "text.autoconfig.ultimatescaler.option.globalXScale": "Global X coordinate scale",
-  "text.autoconfig.ultimatescaler.option.globalYOffset": "Global Y coordinate offset",
-  "text.autoconfig.ultimatescaler.option.globalYScale": "Global Y coordinate scale",
-  "text.autoconfig.ultimatescaler.option.globalZOffset": "Global Z coordinate offset",
-  "text.autoconfig.ultimatescaler.option.globalZScale": "Global Z coordinate scale",
-  "text.autoconfig.ultimatescaler.title": "World offset settings",
-  "commands.locate.pos.range_negative": "Range cannot be negative",
-  "commands.locate.pos.range_too_large": "Range is too big, try a smaller value"
+  "ultimatescaler.commands.locate.pos.not_found": "Position not found in given distance",
+  "ultimatescaler.commands.locate.pos.range_negative": "Range cannot be negative",
+  "ultimatescaler.commands.locate.pos.range_too_large": "Range is too big, try a smaller value",
+  "ultimatescaler.commands.locate.pos.scale_invalid": "Scale must greater than 0",
+  "ultimatescaler.commands.locate.pos.success": "Found position at %s",
+  "ultimatescaler.options": "Ultimate Scaler Options",
+  "ultimatescaler.options.parsableDouble.tooltip": "Enter strings that can be converted to double type,\nincluding a normal value, a scientific notation value, (-)Infinity or NaN.",
+  "ultimatescaler.options.worldgen": "World generation settings",
+  "ultimatescaler.options.worldgen.offset": "Terrain Offset",
+  "ultimatescaler.options.worldgen.offset.globalOffset": "Global coordinate offset (X, Y, Z)",
+  "ultimatescaler.options.worldgen.offset.globalScale": "Global coordinate scale (X, Y, Z)"
 }

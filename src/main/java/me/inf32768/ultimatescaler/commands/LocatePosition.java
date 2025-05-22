@@ -16,10 +16,10 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class LocatePosition {
-    private static final SimpleCommandExceptionType SCALE_INVALID_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.locate.pos.scale_invalid"));
-    private static final SimpleCommandExceptionType NOT_FOUND_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.locate.pos.not_found"));
-    private static final SimpleCommandExceptionType RANGE_NEGATIVE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.locate.pos.range_negative"));
-    private static final SimpleCommandExceptionType RANGE_TOO_LARGE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("commands.locate.pos.range_too_large"));
+    private static final SimpleCommandExceptionType SCALE_INVALID_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimatescaler.commands.locate.pos.scale_invalid"));
+    private static final SimpleCommandExceptionType NOT_FOUND_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimatescaler.commands.locate.pos.not_found"));
+    private static final SimpleCommandExceptionType RANGE_NEGATIVE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimatescaler.commands.locate.pos.range_negative"));
+    private static final SimpleCommandExceptionType RANGE_TOO_LARGE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimatescaler.commands.locate.pos.range_too_large"));
     public static void init() {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("locate")
             .then(literal("pos")
@@ -89,7 +89,7 @@ public class LocatePosition {
         if (context == null) {
             System.out.println("Locate Position: " + finalResult);
         } else {
-            context.getSource().sendFeedback(() -> Text.translatable("commands.locate.pos.success", finalResult.toString()), false);
+            context.getSource().sendFeedback(() -> Text.translatable("ultimatescaler.commands.locate.pos.success", finalResult.toString()), false);
         }
         return low.doubleValue();
     }

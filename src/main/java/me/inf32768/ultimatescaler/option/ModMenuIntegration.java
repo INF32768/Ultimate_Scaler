@@ -1,4 +1,4 @@
-package me.inf32768.ultimatescaler.config;
+package me.inf32768.ultimatescaler.option;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
@@ -9,6 +9,6 @@ import net.minecraft.client.gui.screen.Screen;
 public class ModMenuIntegration implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return (screen) -> RenderSystem.isOnRenderThread() && Screen.hasShiftDown() ? (Screen) AutoConfig.getConfigScreen(WorldGenOptions.ConfigImpl.class, screen).get() : WorldGenOptions.ConfigImpl.getConfigBuilder().setParentScreen(screen).build();
+        return (screen) -> RenderSystem.isOnRenderThread() && Screen.hasShiftDown() ? (Screen) AutoConfig.getConfigScreen(UltimateScalerOptions.ConfigImpl.class, screen).get() : UltimateScalerOptions.ConfigImpl.getConfigBuilder().setParentScreen(screen).build();
     }
 }

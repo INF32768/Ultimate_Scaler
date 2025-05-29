@@ -47,3 +47,22 @@
 
 ### Bug Fixes
 - Fixed that the debug info `TerrainXYZ` does not work properly when using _Free Camera_.
+
+## 0.2.0 - 2025-5-29
+
+### New Features
+- Added the mod icon.
+- Added a keybind to open the option menu.
+- Added the ability to move the far lands.
+- Added the ability to limit the maximum return value of the method `maintainPrecision`.
+- Added a switch to enable/disable the `TerrainXYZ` line in the debug HUD.
+- Rewrote the `README.md` file.
+- Added the MIT license.
+
+### Improvements
+- Improved the code quality.
+- Improved the stability of the fix for the `IllegalStateException` when generating chunks outside the world border.
+- Improved the literature quality of the package names and class names.
+
+### Bug Fixes
+- Fixed that the modded density function `shift` would return incorrect values.

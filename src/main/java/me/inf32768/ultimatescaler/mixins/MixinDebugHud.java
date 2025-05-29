@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 import java.util.Locale;
 
-import me.inf32768.ultimatescaler.config.WorldGenOptions;
+import me.inf32768.ultimatescaler.option.UltimateScalerOptions;
+
+import static me.inf32768.ultimatescaler.option.UltimateScalerOptions.config;
 
 @Mixin(DebugHud.class)
 public abstract class MixinDebugHud {
@@ -26,9 +28,11 @@ public abstract class MixinDebugHud {
         if (pos == null) {
             return;
         }
-        double x = pos.x * WorldGenOptions.globalScale[0] + WorldGenOptions.globalOffset[0];
-        double y = pos.y * WorldGenOptions.globalScale[1] + WorldGenOptions.globalOffset[1];
-        double z = pos.z * WorldGenOptions.globalScale[2] + WorldGenOptions.globalOffset[2];
-        list.add(String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z));
+        double x = pos.x * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalOffset[0];
+        double y = pos.y * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalOffset[1];
+        double z = pos.z * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalOffset[2];
+        if (config.showTerrainPos) {
+            list.add(String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z));
+        }
     }
 }

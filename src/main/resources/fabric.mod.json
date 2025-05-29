@@ -20,14 +20,16 @@
       "me.inf32768.ultimatescaler.UltimateScaler"
     ],
     "modmenu": [
-      "me.inf32768.ultimatescaler.config.ModMenuIntegration"
+      "me.inf32768.ultimatescaler.option.ModMenuIntegration"
     ]
   },
   "mixins": [
     "mixins.ultimatescaler.json"
   ],
+  "icon": "icon.png",
   "accessWidener": "ultimatescaler.accesswidener",
   "depends": {
+    "fabric-api": ">=0.106.1",
     "fabricloader": ">=0.16.7",
     "cloth-config2": "*",
     "fabric": "*",

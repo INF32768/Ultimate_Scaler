@@ -1,32 +1,39 @@
 # Ultimate Scaler
 [English](README.md) | **简体中文**
 
-一个 Minecraft 模组，可以偏移和缩放地形生成。
-
 [![](https://z3.ax1x.com/2021/08/02/fpgDCq.png)](https://www.curseforge.com/minecraft/mc-mods/fabric-api) [![](https://z3.ax1x.com/2021/08/02/fpgr80.png)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-![](https://s21.ax1x.com/2025/05/16/pEjzmLT.png)
-## 设置
+[![](https://s21.ax1x.com/2025/05/28/pVpUmYq.jpg)]()
+## 介绍
 
-使用 _ModMenu_ 打开设置界面。
+Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生成的修改功能，主要用于探索边境之地和各种与地形生成有关的距离现象。
 
-* `全局 X/Y/Z 缩放/偏移`：缩放或偏移大多数地形生成。
+此Mod仍处于早期开发阶段，功能仍在不断增加中，且可能存在一些Bug。
 
-    * 这个选项目前只影响 Noise 和 OldBlendedNoise。  
+**警告：修改的结果不一定100%符合理论预期**
 
-    * 在未来，这个选项将影响几乎整个地形生成。  
+## 获取
 
-## 调试屏幕
+最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/UltimateScaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts)上下载最新开发版的Mod。
 
-* 在调试屏幕中添加了一行`TerrainXYZ`，显示当前的地形生成位置。  
-![](https://s21.ax1x.com/2025/05/05/pEq1jsg.png)
+## 功能
 
-## 命令
+- 偏移地形生成：在双精度浮点数的范围内偏移大多数地形生成，目前支持偏移的密度函数类型有：
+  - `OldBlendedNoise`：包括高噪声、低噪声和选择器噪声；
+  - Noise类型：包括 `Noise`, `ShiftedNoise`, `Shift`, `Shift_A` 和 `Shift_B`；
+- 修改 `maintainPrecision` 方法，实现更改边境之地生成的位置、移除边缘之地等功能；
+- `locate pos` 命令，用于定位一个特定位置偏移后的坐标；
+- 修复各种原版地形生成算法的Bug；
 
-* `locate pos`：使用二分法定位一个缩放和偏移过的新位置。  
-    * 语法：`/locate pos <originalPos> <scale> <offset> [range]`  
-    * `<originalPos>`：int/String，原本的 X/Y/Z 坐标。
-    * `<scale>`：double，缩放因子，必须大于 0。
-    * `<offset>`：double，偏移量。
-    * `[range]`：double，搜索范围，默认为 `Double.MAX_VALUE / scale - offset`。
-    * 示例：当没有偏移或缩放时，在 X/Z 轴的 607949781904244613165613056 处会生成一个特殊地形，我想知道当 X 轴的缩放为 4.5E8 且偏移量为 607949781904244603165613056 时该地形生成的位置，我可以使用 `/locate pos 607949781904244613165613056 450000000 607949781904244603165613056` 来获取新位置。此命令输出 77，这意味着缩放并偏移后此地形在 X 轴上的 77 处生成。
-    * 这个命令在坐标很小时可能并不实用，但当坐标很大且受到精度损失时，这个命令非常有用。
+## 配置
+
+Mod的配置可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U`）来进行修改，也可以通过配置文件来进行修改。
+
+配置文件位于 `config/ultimatescaler.toml` 中
+
+## 鸣谢
+
+- 感谢 @SysWOWBrO3([BiliBili](https://space.bilibili.com/482351725)) 为本Mod提供图标、封面和建议。
+
+## 许可证
+
+本Mod遵循MIT许可证，你可以在[LICENSE](LICENSE)文件中找到相关信息。

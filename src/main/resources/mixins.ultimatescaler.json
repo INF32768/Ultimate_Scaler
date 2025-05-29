@@ -4,9 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "ultimatescaler-refmap.json",
   "mixins": [
-    "MixinChunkPos",
+    "MixinAbstractChunkHolder",
     "MixinInterpolatedNoiseSampler",
     "MixinNoiseSampler",
+    "MixinOctavePerlinNoiseSampler",
     "MixinShift",
     "MixinShiftA",
     "MixinShiftB",

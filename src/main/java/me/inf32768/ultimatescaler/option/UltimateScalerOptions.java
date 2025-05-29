@@ -28,8 +28,8 @@ public class UltimateScalerOptions {
 
         private String[] globalOffsetStr = {"0.0", "0.0", "0.0"};
         private String[] globalScaleStr = {"1.0", "1.0", "1.0"};
-        private int optionMenuKeyCode;
-        private Modifier optionMenuModifier;
+        private int optionMenuKeyCode = GLFW.GLFW_KEY_U;
+        private Modifier optionMenuModifier = Modifier.of(false, true, false);
         public boolean showTerrainPos = true;
         public FarlandsPos farlandsPos = FarlandsPos.DEFAULT;
         public double farlandsCustomDivider = 33554432;

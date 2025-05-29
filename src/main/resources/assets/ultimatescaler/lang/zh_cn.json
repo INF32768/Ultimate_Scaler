@@ -27,7 +27,7 @@
   "ultimatescaler.options.worldgen.header": "警告：修改的结果不一定100%符合理论预期。",
   "ultimatescaler.options.worldgen.limitReturnValue": "限制maintainPrecision方法返回值",
   "ultimatescaler.options.worldgen.maxNoiseLogarithmValue": "最大返回值（10^n）",
-  "ultimatescaler.options.worldgen.maxNoiseLogarithmValue.tooltip": "调整到特定的数值可以移除边缘之地，但数值难以确定。",
+  "ultimatescaler.options.worldgen.maxNoiseLogarithmValue.tooltip": "调整到特定的数值可以移除边缘之地。",
   "ultimatescaler.options.worldgen.offset": "地形偏移",
   "ultimatescaler.options.worldgen.offset.globalOffset": "全局坐标偏移 (X, Y, Z)",
   "ultimatescaler.options.worldgen.offset.globalScale": "全局坐标缩放 (X, Y, Z)"

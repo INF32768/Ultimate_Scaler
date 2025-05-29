@@ -66,3 +66,12 @@
 
 ### Bug Fixes
 - Fixed that the modded density function `shift` would return incorrect values.
+
+## 0.2.0.1 - 2025-5-29
+
+[Emergency]
+
+### Bug Fixes
+- [!] Fixed that the game could not launch.
+- Fixed that the mod icon was fuzzy.
+- Corrected the incorrect explanation in option menu.

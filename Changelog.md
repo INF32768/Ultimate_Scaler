@@ -75,3 +75,11 @@
 - [!] Fixed that the game could not launch.
 - Fixed that the mod icon was fuzzy.
 - Corrected the incorrect explanation in option menu.
+
+## 0.2.1 - 2025-6-14
+
+### New Features
+- Added the update plan in `README.md`.
+
+### Bug Fixes
+- Fixed that the class `MixinAbstractChunkHolder` was not declared as an abstract class.

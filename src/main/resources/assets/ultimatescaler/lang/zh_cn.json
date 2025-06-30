@@ -10,7 +10,16 @@
   "ultimatescaler.options.general.optionMenuKey": "打开配置菜单",
   "ultimatescaler.options.general.showTerrainPos": "在调试信息中显示偏移后的地形坐标",
   "ultimatescaler.options.parsableDouble.tooltip": "输入可转换成double类型的字符串，\n包括普通数值，科学计数法数值，(-)Infinity或NaN。",
+  "ultimatescaler.options.parsableInt.tooltip": "输入整数值，不要使用小数点或科学计数法。",
   "ultimatescaler.options.worldgen": "世界生成设置",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite": "使用 BigInteger 生成地形",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.1": "通过 BigInteger 重写地形生成，可以在更大的范围内精确偏移几乎所有地形。\n",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.2": "可能导致地形生成大幅变慢、消耗更多内存，",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.3": "需要重启游戏以生效。\n",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.4": "目前已重写的密度函数：",
+  "ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.5": "[\"end_islands\"]",
+  "ultimatescaler.options.worldgen.experimental": "实验性设置",
+  "ultimatescaler.options.worldgen.experimental.header": "警告：实验性功能，不稳定且可能导致游戏崩溃或其他问题。",
   "ultimatescaler.options.worldgen.farlandsCustomDivider": "maintainPrecision 方法除数",
   "ultimatescaler.options.worldgen.farlandsCustomDivider.tooltip": "注意：输入的数值太大或太小都可能导致地形生成出现问题，推荐的范围为512~4294967295。",
   "ultimatescaler.options.worldgen.farlandsPos": "边境之地位置",
@@ -30,5 +39,8 @@
   "ultimatescaler.options.worldgen.maxNoiseLogarithmValue.tooltip": "调整到特定的数值可以移除边缘之地。",
   "ultimatescaler.options.worldgen.offset": "地形偏移",
   "ultimatescaler.options.worldgen.offset.globalOffset": "全局坐标偏移 (X, Y, Z)",
-  "ultimatescaler.options.worldgen.offset.globalScale": "全局坐标缩放 (X, Y, Z)"
+  "ultimatescaler.options.worldgen.offset.globalScale": "全局坐标缩放 (X, Y, Z)",
+  "ultimatescaler.options.worldgen.offset.invalidInput": "输入无效",
+  "ultimatescaler.options.worldgen.simulateEndRings": "模拟“末地环”",
+  "ultimatescaler.options.worldgen.simulateEndRings.tooltip": "在原版中，由于整数移除，末地的地形会在以世界原点为中心的若干个圆形区域中缺失（MC-159283），这些区域被称为“末地环”;\n由于 BigInteger 不会溢出，末地环会被移除，开启此选项后，末地环会被模拟生成并可以被偏移，但不一定符合原版。\n在未启用 BigInteger 重写的情况下，末地环必定会生成且无法被偏移。"
 }

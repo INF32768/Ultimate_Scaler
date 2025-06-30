@@ -15,9 +15,9 @@ public abstract class MixinNoiseSampler {
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunction$Noise;sample(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.NoisePos pos) {
 
-        double x = (pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalOffset[0]) * this.getXzScale();
-        double y = (pos.blockY() * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalOffset[1]) * this.getYScale();
-        double z = (pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalOffset[2]) * this.getXzScale();
+        double x = (pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalIntegerOffset[0].doubleValue()) * this.getXzScale();
+        double y = (pos.blockY() * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalIntegerOffset[1].doubleValue()) * this.getYScale();
+        double z = (pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalIntegerOffset[2].doubleValue()) * this.getXzScale();
 
         args.set(0, x);
         args.set(1, y);

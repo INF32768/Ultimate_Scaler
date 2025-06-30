@@ -83,3 +83,17 @@
 
 ### Bug Fixes
 - Fixed that the class `MixinAbstractChunkHolder` was not declared as an abstract class.
+
+## 0.2.2 - 2025-6-30
+
+### New Features
+- Started the rewrite of the vanilla terrain generation algorithm with BigInteger.
+- Added the ability to offset the density function `end_islands` using BigInteger.
+- Added more content to the update plan in `README.md`.
+- Configured the "Mixin config plugin".
+
+### Improvements
+- The "Global coordinate offset" entry in the options menu now uses BigInteger.
+
+### Bug Fixes
+- Fixed that there were Chinese characters in the English version of the `README.md`

@@ -15,9 +15,9 @@ public abstract class MixinShiftedNoiseSampler {
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunction$Noise;sample(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.NoisePos pos) {
 
-        double d = (pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalOffset[0]) * this.getXzScale() + this.getShiftX().sample(pos);
-        double e = (pos.blockY() * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalOffset[1]) * this.getYScale() + this.getShiftY().sample(pos);
-        double f = (pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalOffset[2]) * this.getXzScale() + this.getShiftZ().sample(pos);
+        double d = (pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalIntegerOffset[0].doubleValue()) * this.getXzScale() + this.getShiftX().sample(pos);
+        double e = (pos.blockY() * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalIntegerOffset[1].doubleValue()) * this.getYScale() + this.getShiftY().sample(pos);
+        double f = (pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalIntegerOffset[2].doubleValue()) * this.getXzScale() + this.getShiftZ().sample(pos);
 
         args.set(0, d);
         args.set(1, e);

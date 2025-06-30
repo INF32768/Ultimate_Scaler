@@ -1,10 +1,11 @@
 {
-  "required": false,
+  "required": true,
   "package": "me.inf32768.ultimatescaler.mixins",
   "compatibilityLevel": "JAVA_21",
   "refmap": "ultimatescaler-refmap.json",
   "mixins": [
     "MixinAbstractChunkHolder",
+    "MixinEndIslands",
     "MixinInterpolatedNoiseSampler",
     "MixinNoiseSampler",
     "MixinOctavePerlinNoiseSampler",
@@ -18,5 +19,6 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin": "me.inf32768.ultimatescaler.option.MixinConfigPlugin"
 }

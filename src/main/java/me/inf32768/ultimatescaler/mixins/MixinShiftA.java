@@ -14,6 +14,6 @@ public abstract class MixinShiftA implements DensityFunctionTypes.Offset {
      */
     @Overwrite
     public double sample(NoisePos pos) {
-        return this.sample((double)pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalOffset[0], 0.0D, (double)pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalOffset[2]);
+        return this.sample((double)pos.blockX() * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalIntegerOffset[0].doubleValue(), 0.0D, (double)pos.blockZ() * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalIntegerOffset[2].doubleValue());
     }
 }

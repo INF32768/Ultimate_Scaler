@@ -28,9 +28,9 @@ public abstract class MixinDebugHud {
         if (pos == null) {
             return;
         }
-        double x = pos.x * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalOffset[0];
-        double y = pos.y * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalOffset[1];
-        double z = pos.z * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalOffset[2];
+        double x = pos.x * UltimateScalerOptions.globalScale[0] + UltimateScalerOptions.globalIntegerOffset[0].doubleValue();
+        double y = pos.y * UltimateScalerOptions.globalScale[1] + UltimateScalerOptions.globalIntegerOffset[1].doubleValue();
+        double z = pos.z * UltimateScalerOptions.globalScale[2] + UltimateScalerOptions.globalIntegerOffset[2].doubleValue();
         if (config.showTerrainPos) {
             list.add(String.format(Locale.ROOT, "TerrainXYZ: %.0f %.0f %.0f", x, y, z));
         }

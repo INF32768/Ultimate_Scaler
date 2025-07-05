@@ -106,3 +106,8 @@
 
 ### 改进 | Improvements
 - 从现在开始，`Changelog.md` 将使用中英双语编写。 | From now on, `Changelog.md` will be written in both Chinese and English.
+
+## 0.2.4 - 2025-7-5
+
+### 漏洞修复 | Bug Fixes
+- 修复了 `weird_scale_multiplier` 偏移密度函数的错误。 | Fixed the error in the `weird_scale_multiplier` offset density function.

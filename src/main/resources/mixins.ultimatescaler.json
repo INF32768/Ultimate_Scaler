@@ -12,7 +12,8 @@
     "MixinShift",
     "MixinShiftA",
     "MixinShiftB",
-    "MixinShiftedNoiseSampler"
+    "MixinShiftedNoiseSampler",
+    "MixinWeirdScaledSampler"
   ],
   "client": [
     "MixinDebugHud"

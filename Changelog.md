@@ -97,3 +97,12 @@
 
 ### Bug Fixes
 - Fixed that there were Chinese characters in the English version of the `README.md`
+
+## 0.2.3 - 2025-7-5
+
+### 新特性 | New Features
+- 新增了偏移密度函数 `weird_scale_multiplier` 的功能。 | Added the ability to offset the density function `weird_scale_multiplier`.
+- 添加了新的更新计划。 | Added a new update plan.
+
+### 改进 | Improvements
+- 从现在开始，`Changelog.md` 将使用中英双语编写。 | From now on, `Changelog.md` will be written in both Chinese and English.

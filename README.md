@@ -31,7 +31,7 @@ The configuration of the Mod can be modified through *Mod Menu* or by pressing t
 ### Short-term plan
 
 - ※Compatible with the server, implement simple communication between the client and the server.
-- ※Offset the density function `weird_scaled_sampler`.
+- ※Rewrite the "noise" density function using BigInteger.
 - ※Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
 - Add comments to the configuration file.
 - Add usage instructions to the option interface.
@@ -40,6 +40,7 @@ The configuration of the Mod can be modified through *Mod Menu* or by pressing t
 - Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
 - Port to 1.18.2 ~ 1.21.1.
 - ✓Offset the generation of the end island.
+- ✓Offset the density function `weird_scaled_sampler`.
 
 ### Middle-term plan
 

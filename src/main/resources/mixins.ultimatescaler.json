@@ -5,6 +5,7 @@
   "refmap": "ultimatescaler-refmap.json",
   "mixins": [
     "MixinAbstractChunkHolder",
+    "MixinDensityFunctionTypes",
     "MixinEndIslands",
     "MixinInterpolatedNoiseSampler",
     "MixinNoiseSampler",

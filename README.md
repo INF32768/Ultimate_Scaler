@@ -16,8 +16,8 @@ The latest stable version of the Mod can be downloaded from [GitHub Releases](ht
 ## Features
 
 - Offset terrain generation: In a wide range, offset most of the terrain generation, and currently support the offset density function types are:
-  - `double` offset: (`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`)
-  - `BigInteger` offset (_Experimental_): (`end_islands`)
+  - `double` offset: (`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`)
+  - `BigInteger` offset (_Experimental_): (`end_islands`) and any other `double` offset functions.
 - Modify the `maintainPrecision` method, which implements the modification of the position of the far lands, and other functions such as removing the fringe lands;
 - The `locate pos` command, which can be used to locate the coordinates of a specific position after offset.
 - Fix various bugs in the original terrain generation algorithms.
@@ -31,16 +31,17 @@ The configuration of the Mod can be modified through *Mod Menu* or by pressing t
 ### Short-term plan
 
 - ※Compatible with the server, implement simple communication between the client and the server.
-- ※Rewrite the "noise" density function using BigInteger.
-- ※Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
 - Add comments to the configuration file.
 - Add usage instructions to the option interface.
 - Disable specified noise: Make specified noise always return 0 when sampling.
 - New command: `noiseinfo`, which displays information related to a noise (such as value range, frequency, overflow position) when given a name or definition.
 - Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
 - Port to 1.18.2 ~ 1.21.1.
+- Change the display of large values in the debugging screen to scientific notation.
 - ✓Offset the generation of the end island.
 - ✓Offset the density function `weird_scaled_sampler`.
+- ✓Rewrite the "noise" density function using BigInteger.
+- ✓Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
 
 ### Middle-term plan
 

@@ -1,9 +1,10 @@
 package me.inf32768.ultimatescaler.mixins;
 
 import me.inf32768.ultimatescaler.option.UltimateScalerOptions;
+import me.inf32768.ultimatescaler.util.Util;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.SimplexNoiseSampler;
-import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -11,7 +12,7 @@ import java.math.BigInteger;
 
 import static me.inf32768.ultimatescaler.option.UltimateScalerOptions.config;
 
-@Mixin(DensityFunctionTypes.EndIslands.class)
+@Mixin(targets = "net.minecraft.world.gen.densityfunction.DensityFunctionTypes$EndIslands")
 public abstract class MixinEndIslands {
     /**
      * @author INF32768
@@ -19,8 +20,8 @@ public abstract class MixinEndIslands {
      */
     @Overwrite
     private static float sample(SimplexNoiseSampler sampler, int x, int z) {
-        BigInteger xScaled = BigInteger.valueOf(x).multiply(UltimateScalerOptions.globalIntegerScale[0]).add(UltimateScalerOptions.globalIntegerOffset[0]);
-        BigInteger zScaled = BigInteger.valueOf(z).multiply(UltimateScalerOptions.globalIntegerScale[2]).add(UltimateScalerOptions.globalIntegerOffset[2]);
+        BigInteger xScaled = Util.getBigIntegerOffsetPos(x, Direction.Axis.X);
+        BigInteger zScaled = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z);
         BigInteger i = xScaled.divide(BigInteger.TWO);
         BigInteger j = zScaled.divide(BigInteger.TWO);
         int k = ((int) (x * UltimateScalerOptions.scaleXFloatPart + UltimateScalerOptions.lastDigitOfOffsetX)) % 2;

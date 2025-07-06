@@ -109,5 +109,23 @@
 
 ## 0.2.4 - 2025-7-5
 
+请注意：此版本被错误地标记为 0.2.3。 | Note: This version was incorrectly marked as 0.2.3.
+
 ### 漏洞修复 | Bug Fixes
 - 修复了 `weird_scale_multiplier` 偏移密度函数的错误。 | Fixed the error in the `weird_scale_multiplier` offset density function.
+
+## 0.2.5 - 2025-7-6
+
+### 新特性 | New Features
+- 使用 BigInteger 重写了噪声类密度函数。 | Rewrote the "noise" density function with BigInteger.
+- 新增了扩展数据包字面量取值范围的功能。 | Added the ability to extend the literal value range of datapacks.
+
+### 改进 | Improvements
+- 提取了常用的偏移代码到 `Util` 类中。 | Extracted common offset code to `Util` class.
+- 调试屏幕中的 `TerrainXYZ` 现在会基于方块坐标计算，且会根据是否启用了 BigInteger 重写而显示不同的信息。 | The `TerrainXYZ` in the debug HUD now calculates based on block coordinates, and displays different information depending on whether BigInteger has been rewritten.
+- 优化了内部类的访问形式，不再使用 `accesswidener`。 | Optimized the access of internal classes, no longer using `accesswidener`.
+- 优化了“shift”类密度函数的偏移方式，不再使用 `@Overwrite` 而改用 `@ModifyArgs`，且类不再实现 `DensityFunctionTypes.Offset`。 | Optimized the offset of the "shift" class density function, no longer using `@Overwrite` but `@ModifyArgs`, and the class no longer implements `DensityFunctionTypes.Offset`.
+- 清除了编译时警告（再次）。 | Cleared compile-time warnings (again).
+
+### 漏洞修复 | Bug Fixes
+- [!] 修复了从 0.2.2 前更新模组后，游戏无法启动的问题。 | Fixed that the game could not launch after updating the mod from 0.2.2.

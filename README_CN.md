@@ -18,8 +18,8 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 ## 功能
 
 - 偏移地形生成：在大范围内偏移大多数地形生成，目前支持偏移的密度函数类型有：
-  - `double` 偏移：(`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`)；
-  - `BigInteger` 偏移（_实验性_）：(`end_islands`)。
+  - `double` 偏移：(`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`)；
+  - `BigInteger` 偏移（_实验性_）：(`end_islands`) 以及所有 `double` 偏移。
 - 修改 `maintainPrecision` 方法，实现更改边境之地生成的位置、移除边缘之地等功能；
 - `locate pos` 命令，用于定位一个特定位置偏移后的坐标；
 - 修复各种原版地形生成算法的Bug；
@@ -35,16 +35,17 @@ Mod的配置可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U
 ### 短期计划
 
 - ※兼容服务端，实现客户端和服务端的简单通信；
-- ※使用 BigInteger 重写噪声类密度函数；
-- ※依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示；
 - 为配置文件添加注释；
 - 在选项界面中添加使用说明；
 - 禁用指定噪声：让指定噪声在采样时始终返回0；
 - 新命令：`noiseinfo`，给定一个噪声的名称或定义，显示其相关信息（如值域、频率、溢出位置等）；
 - 全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
 - 向下移植到1.18.2 ~ 1.21.1；
+- 将调试屏幕中过大的数值显示为科学计数法；
 - ✓偏移末地岛屿的生成；
 - ✓偏移密度函数 `weird_scaled_sampler`。
+- ✓使用 BigInteger 重写噪声类密度函数；
+- ✓依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示；
 
 ### 中期计划
 

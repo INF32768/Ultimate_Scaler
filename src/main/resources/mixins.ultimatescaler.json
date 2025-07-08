@@ -21,6 +21,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "plugin": "me.inf32768.ultimatescaler.option.MixinConfigPlugin"
+  }
 }

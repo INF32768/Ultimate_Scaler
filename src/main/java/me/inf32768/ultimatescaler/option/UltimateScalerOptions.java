@@ -102,7 +102,7 @@ public class UltimateScalerOptions {
                     .setDefaultValue(33554432)
                     .setMin(0.0)
                     .setTooltip(Text.translatable("ultimatescaler.options.worldgen.farlandsCustomDivider.tooltip"))
-                    .setRequirement(Requirement.all(() -> farlandsPosEntry.getValue().equals(FarlandsPos.CUSTOM)))
+                    .setDisplayRequirement(Requirement.all(() -> farlandsPosEntry.getValue().equals(FarlandsPos.CUSTOM)))
                     .build();
             BooleanListEntry limitReturnValueEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimatescaler.options.worldgen.limitReturnValue"), config.limitReturnValue)
                     .setDefaultValue(false)
@@ -111,7 +111,7 @@ public class UltimateScalerOptions {
                     .setDefaultValue(7)
                     .setMax(308)
                     .setTooltip(Text.translatable("ultimatescaler.options.worldgen.maxNoiseLogarithmValue.tooltip"))
-                    .setRequirement(Requirement.all(limitReturnValueEntry::getValue))
+                    .setDisplayRequirement(Requirement.all(limitReturnValueEntry::getValue))
                     .build();
             worldGen.addEntry(worldGenHeader);
             worldGen.addEntry(farlandsPosEntry);
@@ -127,16 +127,14 @@ public class UltimateScalerOptions {
                     .setDefaultValue(false)
                     .setTooltip(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.1")
                             .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.2").styled(s -> s.withColor(Formatting.YELLOW)))
-                            .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.3").styled(s -> s.withColor(Formatting.GOLD)))
-                            .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.4"))
-                            .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.5").styled(s -> s.withColor(Formatting.GREEN)))
+                            .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.3"))
+                            .append(Text.translatable("ultimatescaler.options.worldgen.bigIntegerRewrite.tooltip.4").styled(s -> s.withColor(Formatting.GREEN)))
                     )
-                    .requireRestart()
                     .build();
             BooleanListEntry simulateEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimatescaler.options.worldgen.simulateEndRings"), config.simulateEndRings)
                     .setDefaultValue(false)
                     .setTooltip(Text.translatable("ultimatescaler.options.worldgen.simulateEndRings.tooltip"))
-                    .setRequirement(Requirement.all(bigIntegerRewriteEntry::getValue))
+                    .setDisplayRequirement(Requirement.all(bigIntegerRewriteEntry::getValue))
                     .build();
             experimental.add(experimentalHeader);
             experimental.add(bigIntegerRewriteEntry);

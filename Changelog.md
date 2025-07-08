@@ -129,3 +129,11 @@
 
 ### 漏洞修复 | Bug Fixes
 - [!] 修复了从 0.2.2 前更新模组后，游戏无法启动的问题。 | Fixed that the game could not launch after updating the mod from 0.2.2.
+
+## 0.2.6 - 2025-7-8
+
+### 改进 | Improvements
+- 切换“BigInteger重写”不再需要重启游戏。 | Switching "BigInteger rewrite" no longer requires a restart.
+
+### 漏洞修复 | Bug Fixes
+- 修复了使用BigInteger重写时，末地岛屿无法正确生成的问题。 | Fixed that the end islands were not generated correctly when using BigInteger rewrite.

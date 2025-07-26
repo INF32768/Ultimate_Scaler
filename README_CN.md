@@ -9,16 +9,16 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 此Mod仍处于早期开发阶段，功能仍在不断增加中，且可能存在一些Bug。
 
-**警告：修改的结果不一定100%符合理论预期**
+**警告：修改的结果不一定100%符合理论实际**
 
 ## 获取
 
-最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/UltimateScaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts)上下载最新开发版的Mod。
+最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts)上下载最新开发版的Mod。
 
 ## 功能
 
 - 偏移地形生成：在大范围内偏移大多数地形生成，目前支持偏移的密度函数类型有：
-  - `double` 偏移：(`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`)；
+  - `double` 偏移：(`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`, `y_clamped_gradient`（可选）)；
   - `BigInteger` 偏移（_实验性_）：(`end_islands`) 以及所有 `double` 偏移。
 - 修改 `maintainPrecision` 方法，实现更改边境之地生成的位置、移除边缘之地等功能；
 - `locate pos` 命令，用于定位一个特定位置偏移后的坐标；
@@ -26,26 +26,27 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 ## 配置
 
-Mod的配置可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U`）来进行修改，也可以通过配置文件来进行修改。
+在安装了*Cloth Config*的情况下，配置界面可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U`）来打开，否则需要通过配置文件来进行修改。
 
-配置文件位于 `config/ultimatescaler.toml` 中
+配置文件位于 `config/ultimate_scaler.toml` 中，修改后执行 `/reload` 命令使配置生效。
 
 ## 更新计划
 
 ### 短期计划
-
-- ※兼容服务端，实现客户端和服务端的简单通信；
-- 为配置文件添加注释；
-- 在选项界面中添加使用说明；
-- 禁用指定噪声：让指定噪声在采样时始终返回0；
+- ※实现客户端和服务端的简单通信；
+- ※在选项界面中添加使用说明；
+- ※偏移海平面和地底熔岩层；
+- ※禁用指定噪声：让指定噪声在采样时始终返回0；
+- ※全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
+- ※向下移植到1.18.2 ~ 1.21.1；
 - 新命令：`noiseinfo`，给定一个噪声的名称或定义，显示其相关信息（如值域、频率、溢出位置等）；
-- 全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
-- 向下移植到1.18.2 ~ 1.21.1；
 - 将调试屏幕中过大的数值显示为科学计数法；
+- ✓兼容服务端；
+- ✓为配置文件添加注释；
 - ✓偏移末地岛屿的生成；
 - ✓偏移密度函数 `weird_scaled_sampler`。
 - ✓使用 BigInteger 重写噪声类密度函数；
-- ✓依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示；
+- ✓依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示。
 
 ### 中期计划
 
@@ -56,7 +57,7 @@ Mod的配置可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U
 - 在边缘之地生成天空网格；
 - 移除30000000处的空气墙；
 - 添加“不保存并退出”功能；
-- 阻止游戏在区块生成失败时崩溃；
+- 阻止游戏在区块生成失败时崩溃。
 
 ### 长期计划
 
@@ -72,4 +73,6 @@ Mod的配置可以通过*Mod Menu*，或是按下快捷键（默认是 `Ctrl + U
 
 ## 许可证
 
-本Mod遵循MIT许可证，你可以在[LICENSE](LICENSE)文件中找到相关信息。
+本Mod遵循MIT许可证，可以在[LICENSE](LICENSE)文件中找到相关信息。
+
+本Mod使用了来自[toml4j](https://github.com/mwanji/toml4j)的代码，该代码遵循MIT许可证。

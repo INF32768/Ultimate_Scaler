@@ -1,0 +1,26 @@
+{
+  "required": true,
+  "package": "me.inf32768.ultimate_scaler.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "ultimate_scaler-refmap.json",
+  "mixins": [
+    "MixinAbstractChunkHolder",
+    "MixinDensityFunctionTypes",
+    "MixinEndIslands",
+    "MixinInterpolatedNoiseSampler",
+    "MixinNoiseSampler",
+    "MixinOctavePerlinNoiseSampler",
+    "MixinShift",
+    "MixinShiftA",
+    "MixinShiftB",
+    "MixinShiftedNoiseSampler",
+    "MixinWeirdScaledSampler",
+    "MixinYClampedGradient"
+  ],
+  "client": [
+    "MixinDebugHud"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

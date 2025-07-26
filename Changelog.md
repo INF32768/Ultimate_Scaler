@@ -137,3 +137,21 @@
 
 ### 漏洞修复 | Bug Fixes
 - 修复了使用BigInteger重写时，末地岛屿无法正确生成的问题。 | Fixed that the end islands were not generated correctly when using BigInteger rewrite.
+
+## 0.3.0-pre1 - 2025-7-27
+
+### 新特性 | New Features
+- 新增了“Y轴扩展偏移”选项。 | Added the "Extra Y-axis offset" option.
+- 支持服务端运行。 | Support for server-side running.
+- 在配置文件中添加了注释。 | Added comments to the configuration file.
+- 新增了使用/reload命令重载配置文件的功能。 | Added the ability to reload the configuration file using the /reload command.
+
+### 改进 | Improvements
+- [!] 更改了Mod ID，不再兼容旧版本。 | Changed the Mod ID, no longer compatible with old versions.
+- 彻底重写了配置系统（不再兼容旧版，但是会自动迁移）。 | Completely rewrote the configuration system (not compatible with old versions, but will automatically migrate).
+- 在配置文件中添加了文件版本号。 | Added file version number to the configuration file.
+- Cloth Config 不再是必须依赖。 | Cloth Config is no longer required as a must-have dependency.
+- 为客户端类添加了注解。 | Added annotations to client classes.
+
+### 漏洞修复 | Bug Fixes
+- 修正了不正确的命名。 | Corrected incorrect naming.

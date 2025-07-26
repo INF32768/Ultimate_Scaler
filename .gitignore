@@ -20,7 +20,7 @@ build
 # other
 eclipse
 run
-src/main/java/test
+src/test
 
 # Files from Forge MDK
 forge*changelog.txt

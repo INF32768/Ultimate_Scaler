@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "ultimatescaler",
+  "id": "ultimate_scaler",
   "version": "${version}",
 
   "name": "Ultimate Scaler",
@@ -17,22 +17,25 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.inf32768.ultimatescaler.UltimateScaler"
+      "me.inf32768.ultimate_scaler.UltimateScaler"
     ],
     "modmenu": [
-      "me.inf32768.ultimatescaler.option.ModMenuIntegration"
+      "me.inf32768.ultimate_scaler.option.ModMenuIntegration"
     ]
   },
   "mixins": [
-    "mixins.ultimatescaler.json"
+    "mixins.ultimate_scaler.json"
   ],
   "icon": "icon.png",
-  "accessWidener": "ultimatescaler.accesswidener",
+  "accessWidener": "ultimate_scaler.accessWidener",
   "depends": {
     "fabric-api": ">=0.106.1",
     "fabricloader": ">=0.16.7",
-    "cloth-config2": "*",
     "fabric": "*",
     "minecraft": ">=1.21.2"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "cloth-config2": "*"
   }
 }

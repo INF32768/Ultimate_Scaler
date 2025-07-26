@@ -7,16 +7,16 @@
 Ultimate Scaler is a Minecraft Fabric Mod that provides some modification functions related to terrain generation, mainly for exploring the Far lands and various distance effects related to terrain generation.
 This Mod is still in early development, and new features are being added frequently. There may be some bugs.
 
-**Warning: The results of the modification may not be 100% in line with theoretical expectations.**
+**Warning: The results of the modification may not be 100% in line with theoretical actual.**
 
 ## Download
 
-The latest stable version of the Mod can be downloaded from [GitHub Releases](https://github.com/INF32768/UltimateScaler/releases) or from [AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts) for the latest development version.
+The latest stable version of the Mod can be downloaded from [GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases) or from [AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts) for the latest development version.
 
 ## Features
 
 - Offset terrain generation: In a wide range, offset most of the terrain generation, and currently support the offset density function types are:
-  - `double` offset: (`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`)
+  - `double` offset: (`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`, `y_clamped_gradient`(optional))
   - `BigInteger` offset (_Experimental_): (`end_islands`) and any other `double` offset functions.
 - Modify the `maintainPrecision` method, which implements the modification of the position of the far lands, and other functions such as removing the fringe lands;
 - The `locate pos` command, which can be used to locate the coordinates of a specific position after offset.
@@ -24,20 +24,24 @@ The latest stable version of the Mod can be downloaded from [GitHub Releases](ht
 
 ## Configuration
 
-The configuration of the Mod can be modified through *Mod Menu* or by pressing the shortcut key (default is `Ctrl + U`). The configuration file is located in `config/ultimatescaler.toml`.
+If `Cloth Config` is installed, the option screen can be opened through *Mod Menu* or by pressing the binding key (default is `Ctrl + U`).
+
+The configuration file is located in `config/ultimate_scaler.toml`. After modifying the file, execute the `/reload` command to take effect.
 
 ## Update plan
 
 ### Short-term plan
 
-- ※Compatible with the server, implement simple communication between the client and the server.
-- Add comments to the configuration file.
-- Add usage instructions to the option interface.
-- Disable specified noise: Make specified noise always return 0 when sampling.
+- ※Implement simple communication between the client and the server.
+- ※Offset the sea level and the underground lava layer.
+- ※Add usage instructions to the option interface.
+- ※Disable specified noise: Make specified noise always return 0 when sampling.
+- ※Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
+- ※Port to 1.18.2 ~ 1.21.1.
 - New command: `noiseinfo`, which displays information related to a noise (such as value range, frequency, overflow position) when given a name or definition.
-- Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
-- Port to 1.18.2 ~ 1.21.1.
 - Change the display of large values in the debugging screen to scientific notation.
+- ✓Add comments to the configuration file.
+- ✓Compatible with the server.
 - ✓Offset the generation of the end island.
 - ✓Offset the density function `weird_scaled_sampler`.
 - ✓Rewrite the "noise" density function using BigInteger.
@@ -69,3 +73,5 @@ The configuration of the Mod can be modified through *Mod Menu* or by pressing t
 ## License
 
 This Mod is under the MIT license, and you can find the relevant information in the [LICENSE](LICENSE) file.
+
+This Mod uses the [toml4j](https://github.com/mwanji/toml4j) library, which is licensed under the MIT license.

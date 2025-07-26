@@ -9,7 +9,7 @@ cache:
 build_script:
   - cmd: gradlew build
 artifacts:
-  - path: .\build\libs\UltimateScaler-0.2.6.jar
-    name: UltimateScaler-0.2.6.jar
-  - path: .\build\libs\UltimateScaler-0.2.6-sources.jar
-    name: UltimateScaler-0.2.6-sources.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-pre1.jar
+    name: UltimateScaler-0.3.0-pre1.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-pre1-sources.jar
+    name: UltimateScaler-0.3.0-pre1-sources.jar

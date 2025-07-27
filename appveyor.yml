@@ -13,3 +13,5 @@ artifacts:
     name: ultimate_scaler-0.3.0-pre1.jar
   - path: .\build\libs\ultimate_scaler-0.3.0-pre1-sources.jar
     name: ultimate_scaler-0.3.0-pre1-sources.jar
+on_success:
+  - cmd: dir .\build\libs\

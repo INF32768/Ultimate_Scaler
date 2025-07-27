@@ -13,7 +13,7 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 ## 获取
 
-最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts)上下载最新开发版的Mod。
+最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimate-scaler/build/artifacts)上下载最新开发版的Mod。
 
 ## 功能
 

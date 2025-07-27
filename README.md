@@ -11,7 +11,7 @@ This Mod is still in early development, and new features are being added frequen
 
 ## Download
 
-The latest stable version of the Mod can be downloaded from [GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases) or from [AppVeyor](https://ci.appveyor.com/project/INF32768/ultimatescaler/build/artifacts) for the latest development version.
+The latest stable version of the Mod can be downloaded from [GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases) or from [AppVeyor](https://ci.appveyor.com/project/INF32768/ultimate-scaler/build/artifacts) for the latest development version.
 
 ## Features
 

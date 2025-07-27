@@ -152,6 +152,7 @@
 - 在配置文件中添加了文件版本号。 | Added file version number to the configuration file.
 - Cloth Config 不再是必须依赖。 | Cloth Config is no longer required as a must-have dependency.
 - 为客户端类添加了注解。 | Added annotations to client classes.
+- “全局坐标偏移”现在再次接收小数输入。 | The "Global coordinate offset" now accepts decimal input again.
 
 ### 漏洞修复 | Bug Fixes
 - 修正了不正确的命名。 | Corrected incorrect naming.

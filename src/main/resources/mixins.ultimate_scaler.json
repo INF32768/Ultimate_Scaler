@@ -2,7 +2,7 @@
   "required": true,
   "package": "me.inf32768.ultimate_scaler.mixins",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "ultimate_scaler-refmap.json",
+  "refmap": "ultimate-scaler-refmap.json",
   "mixins": [
     "MixinAbstractChunkHolder",
     "MixinDensityFunctionTypes",
@@ -18,7 +18,8 @@
     "MixinYClampedGradient"
   ],
   "client": [
-    "MixinDebugHud"
+    "MixinDebugHud",
+    "MixinTitleScreen"
   ],
   "injectors": {
     "defaultRequire": 1

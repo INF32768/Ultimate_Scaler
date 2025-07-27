@@ -156,3 +156,12 @@
 
 ### 漏洞修复 | Bug Fixes
 - 修正了不正确的命名。 | Corrected incorrect naming.
+
+## 0.3.0-pre2 - 2025-7-27
+
+[Emergency]
+
+### 漏洞修复 | Bug Fixes
+- [!] 修复了构建版导致游戏无法启动的问题。 | Fixed that the game could not launch.
+- 修复了客户端中配置文件的注释未被翻译的问题。 | Fixed that the comments in the configuration file were not translated.
+- 修复了ConfigReloader类位置错误的问题。 | Fixed that the ConfigReloader class was in the wrong location.

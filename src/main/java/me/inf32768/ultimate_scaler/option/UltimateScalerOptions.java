@@ -3,7 +3,11 @@ package me.inf32768.ultimate_scaler.option;
 import me.inf32768.ultimate_scaler.UltimateScaler;
 import me.inf32768.ultimate_scaler.shadowed.com.moandjiezana.toml.Toml;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.text.OrderedText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import net.minecraft.text.TextContent;
+import net.minecraft.util.Language;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
@@ -11,6 +15,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 
 public final class UltimateScalerOptions {
     //Don't let anyone instantiate this class
@@ -49,17 +54,23 @@ public final class UltimateScalerOptions {
 
     public static void loadConfig() throws IOException {
         if (!CONFIG_PATH.toFile().exists()) {
-            Files.deleteIfExists(FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml"));
-            saveConfig();
+            if (Files.exists(FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml"))) {
+                config = new Toml().read(FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml").toFile()).to(ConfigImpl.class);
+                Files.deleteIfExists(FabricLoader.getInstance().getConfigDir().resolve("ultimatescaler.toml"));
+            }
+            config = new ConfigImpl();
+        } else {
+            config = new Toml().read(CONFIG_PATH.toFile()).to(ConfigImpl.class);
         }
-        config = new Toml().read(CONFIG_PATH.toFile()).to(ConfigImpl.class);
     }
 
     public static void saveConfig() throws IOException {
         if (!CONFIG_PATH.toFile().exists()) {
+            if (config == null) {
+                loadConfig();
+            }
             Files.createFile(CONFIG_PATH);
-            UltimateScaler.LOGGER.info("Created new config file at {}", CONFIG_PATH);
-            config = new ConfigImpl();
+            UltimateScaler.LOGGER.info("[Ultimate Scaler] Created new config file at {}", CONFIG_PATH);
         }
         ConfigManager.writeEntry(CONFIG_PATH, "CONFIG_VERSION", CONFIG_VERSION, new String[] {Text.translatable("ultimate_scaler.config.version_comment").getString()});
         ConfigManager.writeArrayEntry(CONFIG_PATH, "globalBigDecimalOffset", Arrays.stream(config.globalBigDecimalOffset).map(BigDecimal::toString).toList(), new String[] {Text.translatable("ultimate_scaler.options.worldgen.offset.globalOffset").getString(), Text.translatable("ultimate_scaler.options.parsableDecimal.tooltip").getString()});

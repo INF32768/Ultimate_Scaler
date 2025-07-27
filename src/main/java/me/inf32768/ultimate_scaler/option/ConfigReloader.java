@@ -1,6 +1,6 @@
-package me.inf32768.ultimate_scaler;
+package me.inf32768.ultimate_scaler.option;
 
-import me.inf32768.ultimate_scaler.option.UltimateScalerOptions;
+import me.inf32768.ultimate_scaler.UltimateScaler;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -22,6 +22,6 @@ public class ConfigReloader implements SimpleSynchronousResourceReloadListener {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        UltimateScaler.LOGGER.info("Config reloaded");
+        UltimateScaler.LOGGER.info("[Ultimate Scaler] Config reloaded");
     }
 }

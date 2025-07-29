@@ -165,3 +165,18 @@
 - [!] 修复了构建版导致游戏无法启动的问题。 | Fixed that the game could not launch.
 - 修复了客户端中配置文件的注释未被翻译的问题。 | Fixed that the comments in the configuration file were not translated.
 - 修复了ConfigReloader类位置错误的问题。 | Fixed that the ConfigReloader class was in the wrong location.
+
+## 0.3.0-pre3 - 2025-7-29
+
+### 新特性 | New Features
+- “Y轴扩展偏移”现在可以偏移海平面和地底熔岩层。 | The "Extra Y-axis offset" now can offset the surface of the oceans and the underground lava layers.
+- 新增了替换默认流体和地底熔岩的功能。 | Added the ability to replace the default fluids and underground lava.
+- 向下兼容至1.21。 | Ported down to 1.21.
+
+### 改进 | Improvements
+- 重写了末地岛屿生成算法。 | Revised the algorithm for generating the end islands.
+- 将“模拟末地环”更改为“修复末地环”，功能同样修改，且不需要再开启BigInteger重写。| Changed "Simulate End Rings" to "Fix End Rings", function is the same, and no longer need to enable BigInteger rewrite.
+- 配置文件版本更新为2。 | Updated the configuration file version to 2.
+
+### 漏洞修复 | Bug Fixes
+- 这里绝对没有漏洞，修个屁:D | There is absolutely no bugs, fix a f**king sh*t:D

@@ -29,10 +29,10 @@
   "icon": "icon.png",
   "accessWidener": "ultimate_scaler.accessWidener",
   "depends": {
-    "fabric-api": ">=0.106.1",
-    "fabricloader": ">=0.16.7",
+    "fabric-api": ">=0.100.1",
+    "fabricloader": ">=0.16.0",
     "fabric": "*",
-    "minecraft": ">=1.21.2"
+    "minecraft": ">=1.21"
   },
   "suggests": {
     "modmenu": "*",

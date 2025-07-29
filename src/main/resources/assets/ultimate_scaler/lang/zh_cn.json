@@ -1,4 +1,5 @@
 {
+  "ultimate_scaler.commands.locate.pos.invalid_decimal": "输入无效：%s",
   "ultimate_scaler.commands.locate.pos.not_found": "无法在给定的范围内找到该坐标",
   "ultimate_scaler.commands.locate.pos.range_negative": "范围不能为负数",
   "ultimate_scaler.commands.locate.pos.range_too_large": "范围过大，请缩小范围",
@@ -17,6 +18,7 @@
   "ultimate_scaler.options.general.optionMenuKey": "打开配置菜单的快捷键",
   "ultimate_scaler.options.general.showTerrainPos": "在调试屏幕中显示偏移后的地形坐标",
   "ultimate_scaler.options.parsableDecimal.tooltip": "输入十进制数值，\n包括普通数值或用“E”/“e”表示的科学计数法数值。",
+  "ultimate_scaler.options.server.publicTerrainPos": "将地形坐标公开给其他玩家",
   "ultimate_scaler.options.worldgen": "世界生成设置",
   "ultimate_scaler.options.worldgen.FarLandsPos.BETA": "B-1.7.3 前",
   "ultimate_scaler.options.worldgen.FarLandsPos.BETA.tooltip": "12550824",
@@ -35,7 +37,11 @@
   "ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.4": "[\"end_islands\", \"old_blended_noise\", \"noise\", \"shifted_noise\", \"shift_A\", \"shift_B\", \"shift\", \"weird_scaled_sampler\"]",
   "ultimate_scaler.options.worldgen.experimental": "实验性设置",
   "ultimate_scaler.options.worldgen.experimental.header": "警告：实验性功能，不稳定且可能导致游戏崩溃或其他问题。",
+  "ultimate_scaler.options.worldgen.extraYOffset": "Y轴扩展偏移",
+  "ultimate_scaler.options.worldgen.extraYOffset.tooltip": "偏移更多影响Y轴生成的因素，以得到更加合理的地形生成。\n请注意，开启后，在不修改地形生成算法的情况下，Y轴上的所有边境之地都不会生成。\n偏移对象：“y_clamped_gradient”密度函数、海平面及地底熔岩。",
   "ultimate_scaler.options.worldgen.farLandsPos": "边境之地位置",
+  "ultimate_scaler.options.worldgen.fixEndRings": "修复“末地环”",
+  "ultimate_scaler.options.worldgen.fixEndRings.tooltip": "在原版中，由于整数移除，末地的地形会在以世界原点为中心的若干个圆形区域中缺失（MC-159283），这些区域被称为“末地环”；\n开启此选项后，“末地环”将被修复（不再生成）。",
   "ultimate_scaler.options.worldgen.header": "警告：修改的结果不一定100%符合理论预期。",
   "ultimate_scaler.options.worldgen.limitReturnValue": "限制maintainPrecision方法返回值",
   "ultimate_scaler.options.worldgen.maintainPrecisionCustomDivisor": "maintainPrecision方法除数",
@@ -46,8 +52,8 @@
   "ultimate_scaler.options.worldgen.offset.globalOffset": "全局坐标偏移 (X, Y, Z)",
   "ultimate_scaler.options.worldgen.offset.globalScale": "全局坐标缩放 (X, Y, Z)",
   "ultimate_scaler.options.worldgen.offset.invalidInput": "输入无效",
-  "ultimate_scaler.options.worldgen.extraYOffset": "Y轴扩展偏移",
-  "ultimate_scaler.options.worldgen.extraYOffset.tooltip": "偏移更多影响Y轴生成的因素，以得到更加合理的地形生成。\n请注意，开启后，在不修改地形生成算法的情况下，Y轴上的所有边境之地都不会生成。",
-  "ultimate_scaler.options.worldgen.simulateEndRings": "模拟“末地环”",
-  "ultimate_scaler.options.worldgen.simulateEndRings.tooltip": "在原版中，由于整数移除，末地的地形会在以世界原点为中心的若干个圆形区域中缺失（MC-159283），这些区域被称为“末地环”;\n由于 BigInteger 不会溢出，末地环会被移除，开启此选项后，末地环会被模拟生成并被偏移，但不一定符合原版。\n在未启用 BigInteger 重写的情况下，末地环必定会生成且无法被偏移。"
+  "ultimate_scaler.options.worldgen.replaceDefaultFluid": "替换默认流体",
+  "ultimate_scaler.options.worldgen.replaceDefaultFluid.tooltip": "将任何维度的默认流体（主世界：水；下界：熔岩；末地：空气）替换为指定方块。",
+  "ultimate_scaler.options.worldgen.replaceUndergroundLava": "替换地底熔岩",
+  "ultimate_scaler.options.worldgen.replaceUndergroundLava.tooltip": "将主世界地底的熔岩（Y<-54）替换为指定方块（不一定有效）。"
 }

@@ -8,6 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.MinecraftVersion;
 import net.minecraft.resource.ResourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ public class UltimateScaler implements ModInitializer {
 
 public static final boolean IS_RUNNING_ON_CLIENT = FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
 public static final boolean IS_CLOTH_CONFIG_PRESENT = FabricLoader.getInstance().isModLoaded("cloth-config2");
+public static final int MC_VERSION = MinecraftVersion.CURRENT.getSaveVersion().getId();
 public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
 
     @Override

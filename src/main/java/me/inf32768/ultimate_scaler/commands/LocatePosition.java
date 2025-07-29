@@ -1,5 +1,6 @@
 package me.inf32768.ultimate_scaler.commands;
 
+import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -16,6 +17,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class LocatePosition {
+    private static final SimpleCommandExceptionType INVALID_DECIMAL_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimate_scaler.commands.locate.pos.invalid_decimal"));
     private static final SimpleCommandExceptionType SCALE_INVALID_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimate_scaler.commands.locate.pos.scale_invalid"));
     private static final SimpleCommandExceptionType NOT_FOUND_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimate_scaler.commands.locate.pos.not_found"));
     private static final SimpleCommandExceptionType RANGE_NEGATIVE_EXCEPTION = new SimpleCommandExceptionType(Text.translatable("ultimate_scaler.commands.locate.pos.range_negative"));
@@ -40,17 +42,27 @@ public class LocatePosition {
             throw RANGE_NEGATIVE_EXCEPTION.create();
         }
 
-        BigDecimal p = new BigDecimal(originalPos);
-        BigDecimal s = new BigDecimal(scale);
+         BigDecimal p;
+         try {
+             p = new BigDecimal(originalPos);
+         } catch (NumberFormatException e) {
+             throw INVALID_DECIMAL_EXCEPTION.createWithContext(new StringReader(e.getMessage()));
+         }
+         BigDecimal s = new BigDecimal(scale);
         BigDecimal o = new BigDecimal(offset);
 
         if (range == 0) {
             range = Double.MAX_VALUE / scale - offset;
         }
 
-        BigDecimal r = new BigDecimal(range);
+         BigDecimal r;
+         try {
+             r = new BigDecimal(range);
+         } catch (NumberFormatException e) {
+             throw RANGE_TOO_LARGE_EXCEPTION.createWithContext(new StringReader(e.getMessage()));
+         }
 
-        // 初始化二分查找的上下界
+         // 初始化二分查找的上下界
         BigInteger low = r.toBigInteger().negate();
         BigInteger high = low.negate(); // 假设一个足够大的上限
 
@@ -58,9 +70,6 @@ public class LocatePosition {
         while (low.subtract(high).doubleValue() < -1) {
             BigInteger mid = low.add(high).divide(BigInteger.valueOf(2));
             BigDecimal midBigDecimal = new BigDecimal(mid);
-            if (midBigDecimal.compareTo(new BigDecimal(Double.MAX_VALUE)) > 0) {
-                throw RANGE_TOO_LARGE_EXCEPTION.create();
-            }
 
             // 计算mid * s + o
             double resultDouble = midBigDecimal.doubleValue() * s.doubleValue() + o.doubleValue();
@@ -81,16 +90,16 @@ public class LocatePosition {
         if (result.compareTo(p) < 0) {
             low = low.add(BigInteger.ONE);
         }
-        if (low.compareTo(r.toBigInteger()) > 0 || low.compareTo(r.toBigInteger().negate()) < 0) {
+        if (low.compareTo(r.toBigInteger()) > 0 || low.compareTo(r.toBigInteger().negate()) < 0 || result.compareTo(p) < 0) {
             throw NOT_FOUND_EXCEPTION.create();
         }
 
         BigInteger finalResult = low;
         if (context == null) {
-            System.out.println("Locate Position: " + finalResult);
+            System.out.println("Located Position: " + finalResult);
         } else {
             context.getSource().sendFeedback(() -> Text.translatable("ultimate_scaler.commands.locate.pos.success", finalResult.toString()), false);
         }
-        return low.doubleValue();
+        return finalResult.doubleValue();
     }
 }

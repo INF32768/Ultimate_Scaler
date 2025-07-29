@@ -1,21 +1,30 @@
 package me.inf32768.ultimate_scaler.option;
 
+import me.inf32768.ultimate_scaler.UltimateScaler;
 import me.shedaniel.clothconfig2.api.*;
 import me.shedaniel.clothconfig2.gui.entries.*;
+import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
@@ -76,6 +85,24 @@ public class ClothConfigBuilder {
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.maxNoiseLogarithmValue.tooltip"))
                 .setDisplayRequirement(Requirement.all(limitReturnValueEntry::getValue))
                 .build();
+        BooleanListEntry replaceDefaultFluidEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.replaceDefaultFluid"), config.replaceDefaultFluid)
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceDefaultFluid.tooltip"))
+                .build();
+        DropdownBoxEntry<Block> replaceDefaultFluidBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceDefaultFluidBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+                .setDefaultValue(Blocks.AIR)
+                .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
+                .setDisplayRequirement(Requirement.all(replaceDefaultFluidEntry::getValue))
+                .build();
+        BooleanListEntry replaceUndergroundLavaEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava"), config.replaceUndergroundLava)
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava.tooltip"))
+                .build();
+        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+                .setDefaultValue(Blocks.AIR)
+                .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
+                .setDisplayRequirement(Requirement.all(replaceUndergroundLavaEntry::getValue))
+                .build();
         worldGen.addEntry(worldGenHeader);
         worldGen.addEntry(farLandsPosEntry);
         worldGen.addEntry(maintainPrecisionCustomDivisorEntry);
@@ -83,6 +110,10 @@ public class ClothConfigBuilder {
         worldGen.addEntry(maxNoiseValueEntry);
         worldGen.addEntry(globalOffsetEntry);
         worldGen.addEntry(globalScaleEntry);
+        worldGen.addEntry(replaceDefaultFluidEntry);
+        worldGen.addEntry(replaceDefaultFluidBlockEntry);
+        worldGen.addEntry(replaceUndergroundLavaEntry);
+        worldGen.addEntry(replaceUndergroundLavaBlockEntry);
 
         SubCategoryBuilder experimental = entryBuilder.startSubCategory(Text.translatable("ultimate_scaler.options.worldgen.experimental"));
         TextListEntry experimentalHeader = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.worldgen.experimental.header").styled(s -> s.withBold(true).withColor(Formatting.RED))).build();
@@ -94,9 +125,9 @@ public class ClothConfigBuilder {
                         .append(Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.4").styled(s -> s.withColor(Formatting.GREEN)))
                 )
                 .build();
-        BooleanListEntry simulateEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.simulateEndRings"), config.simulateEndRings)
+        BooleanListEntry fixEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings"), config.fixEndRings)
                 .setDefaultValue(false)
-                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.simulateEndRings.tooltip"))
+                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip"))
                 .setDisplayRequirement(Requirement.all(bigIntegerRewriteEntry::getValue))
                 .build();
         BooleanListEntry extraYOffsetEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.extraYOffset"), config.extraYOffset)
@@ -105,7 +136,7 @@ public class ClothConfigBuilder {
                 .build();
         experimental.add(experimentalHeader);
         experimental.add(bigIntegerRewriteEntry);
-        experimental.add(simulateEndRingsEntry);
+        experimental.add(fixEndRingsEntry);
         experimental.add(extraYOffsetEntry);
         worldGen.addEntry(experimental.build());
 
@@ -121,7 +152,9 @@ public class ClothConfigBuilder {
                 .requireRestart()
                 .build();
         fix.addEntry(fixHeader);
-        fix.addEntry(fixChunkGenerationOutOfBoundEntry);
+        if (UltimateScaler.MC_VERSION >= 4080) {
+            fix.addEntry(fixChunkGenerationOutOfBoundEntry);
+        }
         fix.addEntry(expandDatapackValueRangeEntry);
 
         builder.setSavingRunnable(() -> {
@@ -138,9 +171,13 @@ public class ClothConfigBuilder {
             config.maintainPrecisionCustomDivisor = maintainPrecisionCustomDivisorEntry.getValue();
             config.limitReturnValue = limitReturnValueEntry.getValue();
             config.maxNoiseLogarithmValue = maxNoiseValueEntry.getValue();
+            config.replaceDefaultFluid = replaceDefaultFluidEntry.getValue();
+            config.replaceDefaultFluidBlock = Registries.BLOCK.getId(replaceDefaultFluidBlockEntry.getValue()).toString();
+            config.replaceUndergroundLava = replaceUndergroundLavaEntry.getValue();
+            config.replaceUndergroundLavaBlock = Registries.BLOCK.getId(replaceUndergroundLavaBlockEntry.getValue()).toString();
             config.extraYOffset = extraYOffsetEntry.getValue();
             config.bigIntegerRewrite = bigIntegerRewriteEntry.getValue();
-            config.simulateEndRings = simulateEndRingsEntry.getValue();
+            config.fixEndRings = fixEndRingsEntry.getValue();
             config.fixChunkGenerationOutOfBound = fixChunkGenerationOutOfBoundEntry.getValue();
             config.expandDatapackValueRange = expandDatapackValueRangeEntry.getValue();
             try {

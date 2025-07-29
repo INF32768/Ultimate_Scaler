@@ -2,16 +2,13 @@ package me.inf32768.ultimate_scaler.mixins;
 
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.SimplexNoiseSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.math.BigInteger;
 
@@ -19,41 +16,47 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
 @Mixin(targets = "net.minecraft.world.gen.densityfunction.DensityFunctionTypes$EndIslands")
 public abstract class MixinEndIslands {
-    @Shadow @Final private SimplexNoiseSampler sampler;
 
-    @Inject(method = "sample(Lnet/minecraft/world/gen/densityfunction/DensityFunction$NoisePos;)D", at = @At("TAIL"), cancellable = true)
-    public void modifySample(DensityFunction.NoisePos pos, CallbackInfoReturnable<Double> cir) {
+    @ModifyArgs(method = "sample(Lnet/minecraft/world/gen/densityfunction/DensityFunction$NoisePos;)D", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunctionTypes$EndIslands;sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F"))
+    private void modifyNoisePos(Args args, DensityFunction.NoisePos pos) {
         if (config.bigIntegerRewrite) {
-            BigInteger x = Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).divide(BigInteger.valueOf(8));
-            BigInteger z = Util.getBigIntegerOffsetPos(pos.blockZ(), Direction.Axis.Z).divide(BigInteger.valueOf(8));
-            cir.setReturnValue(((double) sample(this.sampler, x, z) - (double) 8.0F) / (double) 128.0F);
+            args.set(1, pos.blockX());
+            args.set(2, pos.blockZ());
         }
     }
 
-    @Unique
-    private static float sample(SimplexNoiseSampler sampler, BigInteger x, BigInteger z) {
-        BigInteger i = x.divide(BigInteger.TWO);
-        BigInteger j = z.divide(BigInteger.TWO);
-        int k = x.remainder(BigInteger.TWO).intValue();
-        int l = z.remainder(BigInteger.TWO).intValue();
-        float f = 100.0F - MathHelper.sqrt(config.simulateEndRings ? (float) (x.intValue() * x.intValue() + z.intValue() * z.intValue()) : x.multiply(x).add(z.multiply(z)).floatValue()) * 8.0F;
-        f = MathHelper.clamp(f, -100.0F, 80.0F);
-
-        for(int m = -12; m <= 12; ++m) {
-            for(int n = -12; n <= 12; ++n) {
-                BigInteger o = i.add(BigInteger.valueOf(m));
-                BigInteger p = j.add(BigInteger.valueOf(n));
-                if (o.multiply(o).add(p.multiply(p)).doubleValue() > 4096 && sampler.sample(o.doubleValue(), p.doubleValue()) < (double)-0.9F) {
-                    float g = (MathHelper.abs(o.floatValue()) * 3439.0F + MathHelper.abs(p.floatValue()) * 147.0F) % 13.0F + 9.0F;
-                    float h = (float)(k - m * 2);
-                    float q = (float)(l - n * 2);
-                    float r = 100.0F - MathHelper.sqrt(h * h + q * q) * g;
-                    r = MathHelper.clamp(r, -100.0F, 80.0F);
-                    f = Math.max(f, r);
-                }
+    @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 2)
+    private static int modifySampleX(int original, SimplexNoiseSampler sampler, int x, int z) {
+        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(16)).intValue() : original;
+    }
+    @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 3)
+    private static int modifySampleZ(int original, SimplexNoiseSampler sampler, int x, int z) {
+        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(16)).intValue() : original;
+    }
+    @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 4)
+    private static int modifySampleX1(int original, SimplexNoiseSampler sampler, int x, int z) {
+        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
+    }
+    @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 5)
+    private static int modifySampleZ2(int original, SimplexNoiseSampler sampler, int x, int z) {
+        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : 0;
+    }
+    @ModifyArgs(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;sqrt(F)F", ordinal = 0))
+    private static void modifySqrt(Args args, SimplexNoiseSampler sampler, int x, int z) {
+        if (config.fixEndRings) {
+            if (config.bigIntegerRewrite) {
+                BigInteger offsetX = Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8));
+                BigInteger offsetZ = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8));
+                args.set(0, offsetX.multiply(offsetX).add(offsetZ.multiply(offsetZ)).floatValue());
+            } else {
+                double xDouble = Util.getDoubleOffsetPos(x, Direction.Axis.X);
+                double zDouble = Util.getDoubleOffsetPos(z, Direction.Axis.Z);
+                args.set(0, (float) (xDouble * xDouble + zDouble * zDouble));
             }
+        } else {
+            int offsetX = Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8)).intValue();
+            int offsetZ = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).intValue();
+            args.set(0, (float) (offsetX * offsetX + offsetZ * offsetZ));
         }
-
-        return f;
     }
 }

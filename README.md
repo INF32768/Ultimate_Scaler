@@ -33,11 +33,9 @@ The configuration file is located in `config/ultimate_scaler.toml`. After modify
 ### Short-term plan
 
 - ※Implement simple communication between the client and the server.
-- ※Offset the sea level and the underground lava layer.
 - ※Add usage instructions to the option interface.
-- ※Disable specified noise: Make specified noise always return 0 when sampling.
-- ※Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
-- ※Port to 1.18.2 ~ 1.21.1.
+- Disable specified noise: Make specified noise always return 0 when sampling.
+- Port to 1.18.2 ~ 1.19.4.
 - New command: `noiseinfo`, which displays information related to a noise (such as value range, frequency, overflow position) when given a name or definition.
 - Change the display of large values in the debugging screen to scientific notation.
 - ✓Add comments to the configuration file.
@@ -46,6 +44,9 @@ The configuration file is located in `config/ultimate_scaler.toml`. After modify
 - ✓Offset the density function `weird_scaled_sampler`.
 - ✓Rewrite the "noise" density function using BigInteger.
 - ✓Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
+- ✓Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
+- ✓Port to 1.21 ~ 1.21.1.
+- ✓Offset the sea level and the underground lava layer.
 
 ### Middle-term plan
 

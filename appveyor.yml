@@ -21,6 +21,7 @@ deploy:
     _This is a draft release._
     "
     auth_token:
-      secure: vk8X7M09af5EZiUitQqDhgWhOXFCkvUeXRrEbdSty0zlFhH+r5A2poHSDbPLKc+gCcNgXyCYQiMCaniWgFGIwn53cgP2TVm+G/djiyZVifw=
+      secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR
+    artifact: UltimateScaler-0.3.0-rc1.jar
     draft: true
     prerelease: true

@@ -9,6 +9,7 @@ cache:
 build_script:
   - cmd: gradlew build
 after_build:
+  - ps: Get-Process java -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match 'gradle' } | Stop-Process -Force
   - ps: Remove-Item -Path "$env:USERPROFILE\.gradle\caches\modules-2\modules-2.lock" -Force -ErrorAction SilentlyContinue
 artifacts:
   - path: .\build\libs\UltimateScaler-0.3.0-rc1.jar

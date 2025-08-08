@@ -6,10 +6,11 @@ import me.inf32768.ultimate_scaler.option.KeyBindings;
 import me.inf32768.ultimate_scaler.option.UltimateScalerOptions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.MinecraftVersion;
 import net.minecraft.resource.ResourceType;
+import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +20,20 @@ public class UltimateScaler implements ModInitializer {
 
 public static final boolean IS_RUNNING_ON_CLIENT = FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
 public static final boolean IS_CLOTH_CONFIG_PRESENT = FabricLoader.getInstance().isModLoaded("cloth-config2");
+public static final boolean IS_FABRIC_API_PRESENT = FabricLoader.getInstance().isModLoaded("fabric-api");
 public static final int MC_VERSION = MinecraftVersion.CURRENT.getSaveVersion().getId();
+public static MinecraftServer serverInstance;
 public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
 
     @Override
     public void onInitialize() {
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+            serverInstance = server;
+        });
         if (IS_RUNNING_ON_CLIENT) {
-            KeyBindings.init();
+            if (IS_FABRIC_API_PRESENT) {
+                KeyBindings.init();
+            }
         } else {
             try {
                 UltimateScalerOptions.saveConfig();
@@ -33,7 +41,11 @@ public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
                 throw new RuntimeException(e);
             }
         }
-        LocatePosition.init();
-        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new ConfigReloader());
+        if (IS_FABRIC_API_PRESENT) {
+            ConfigReloader.init();
+            LocatePosition.init();
+        } else {
+            LOGGER.warn("Fabric API is not present, some core features may not work properly!");
+        }
     }
 }

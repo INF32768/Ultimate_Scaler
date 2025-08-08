@@ -1,25 +1,44 @@
 # Ultimate Scaler
+
 [English](README.md) | **简体中文**
 
-[![](https://z3.ax1x.com/2021/08/02/fpgDCq.png)](https://www.curseforge.com/minecraft/mc-mods/fabric-api) [![](https://z3.ax1x.com/2021/08/02/fpgr80.png)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
 [![](https://s21.ax1x.com/2025/05/28/pVpUmYq.jpg)]()
+
+[![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
+![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
+![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
+![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler/master)
+
 ## 介绍
 
 Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生成的修改功能，主要用于探索边境之地和各种与地形生成有关的距离现象。
 
-此Mod仍处于早期开发阶段，功能仍在不断增加中，且可能存在一些Bug。
+此Mod仍处于开发阶段，功能仍在不断增加中，且可能存在一些Bug。
 
-**警告：修改的结果不一定100%符合理论实际**
+**警告：修改的结果不一定100%符合理论实际。**
 
-## 获取
+**警告：请在使用前备份存档，若因使用本Mod而造成存档破坏或损失，作者概不负责！**
 
-最新正式版的Mod可以从[GitHub Releases](https://github.com/INF32768/Ultimate_Scaler/releases)下载，或在[AppVeyor](https://ci.appveyor.com/project/INF32768/ultimate-scaler/build/artifacts)上下载最新开发版的Mod。
+## 前置
+
+- [Fabric API](https://github.com/FabricMC/fabric)：用于提供Mod加载、配置、命令等功能。
+  - 即使不安装Fabric API，本Mod也能正常运行，但可能无法使用部分重要功能。
+- （可选）[Cloth Config](https://github.com/shedaniel/cloth-config)：用于提供配置界面。
 
 ## 功能
 
-- 偏移地形生成：在大范围内偏移大多数地形生成，目前支持偏移的密度函数类型有：
-  - `double` 偏移：(`old_blended_noise`, `noise`, `shifted_noise`, `shift_A`, `shift_B`, `shift`, `weird_scaled_sampler`, `y_clamped_gradient`（可选）)；
-  - `BigInteger` 偏移（_实验性_）：(`end_islands`) 以及所有 `double` 偏移。
+- 偏移地形生成：在大范围内偏移大多数地形生成，目前支持偏移的内容有：
+  - 密度函数：
+    - `old_blended_noise`,
+    - `noise`,
+    - `shifted_noise`,
+    - `shift_A`,
+    - `shift_B`,
+    - `shift`,
+    - `weird_scaled_sampler`,
+    - `y_clamped_gradient`（可选）.
+  - 海平面和地底熔岩层（可选）。
+  - 若开启“BigInteger重写”（_实验性_），则可以额外偏移密度函数`end_islands`，并实现精准偏移。
 - 修改 `maintainPrecision` 方法，实现更改边境之地生成的位置、移除边缘之地等功能；
 - `locate pos` 命令，用于定位一个特定位置偏移后的坐标；
 - 修复各种原版地形生成算法的Bug；
@@ -30,24 +49,42 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 配置文件位于 `config/ultimate_scaler.toml` 中，修改后执行 `/reload` 命令使配置生效。
 
+## 兼容性
+
+### Minecraft版本
+
+本分支的Mod兼容Minecraft 1.21 - 1.21.8。
+
+（由于技术原因，运行在1.21 - 1.21.1版本的Mod无法使用配置界面）
+
+### 其他Mod
+
+- 本Mod与大多数无关地形生成的mod互不影响。
+- 本Mod兼容几乎所有通过数据包新增自定义地形生成，或是微调原版地形生成的mod，且可以偏移其生成的地形，如《The Aether》；
+    - 得益于数据包的强大能力，大多数mod都使用了数据包来新增自定义地形生成。
+- 本Mod兼容，但不影响大多数通过数据包以外的其他方法新增地形生成的mod，如《Modern Beta》；
+- 本Mod不兼容对原版生成器进行了大量侵入式修改的mod，同时安装通常会使游戏无法启动，如《Concurrent Chunk Management Engine》。
+
 ## 更新计划
 
 ### 短期计划
-- ※实现客户端和服务端的简单通信；
-- ※在选项界面中添加使用说明；
+
+- 实现客户端和服务端的简单通信；
 - 禁用指定噪声：让指定噪声在采样时始终返回0；
 - 向下移植到1.18.2 ~ 1.19.3；
+- 让运行在1.21 - 1.21.1版本的Mod也能使用配置界面；
 - 新命令：`noiseinfo`，给定一个噪声的名称或定义，显示其相关信息（如值域、频率、溢出位置等）；
 - 将调试屏幕中过大的数值显示为科学计数法；
-- ✓偏移末地岛屿的生成；
-- ✓偏移密度函数 `weird_scaled_sampler`。
-- ✓使用 BigInteger 重写噪声类密度函数；
-- ✓依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示。
-- ✓兼容服务端；
-- ✓为配置文件添加注释；
-- ✓偏移海平面和地底熔岩层；
-- ✓全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
-- ✓向下移植到1.21 ~ 1.21.1；
+- ✓ 偏移末地岛屿的生成；
+- ✓ 偏移密度函数 `weird_scaled_sampler`。
+- ✓ 使用 BigInteger 重写噪声类密度函数；
+- ✓ 依据当前使用的偏移模式，自动调整调试屏幕中 `TerrainPos` 的显示。
+- ✓ 兼容服务端；
+- ✓ 为配置文件添加注释；
+- ✓ 偏移海平面和地底熔岩层；
+- ✓ 全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
+- ✓ 向下移植到1.21 ~ 1.21.1；
+- ✓ 在选项界面中添加使用说明
 
 ### 中期计划
 
@@ -56,7 +93,7 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 - 添加Java版不同版本的地形生成算法，如1.18.1，1.12.2，Beta版等，直至Pre-Classic版本；
 - 修复坐标超过33554432时出现的一系列Bug，如崩溃、方块停止渲染、光照效果异常等；
 - 在边缘之地生成天空网格；
-- 移除30000000处的空气墙；
+- 移除30000000处的空气墙，破除/tp的坐标限制；
 - 添加“不保存并退出”功能；
 - 阻止游戏在区块生成失败时崩溃。
 

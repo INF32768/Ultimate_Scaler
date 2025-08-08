@@ -17,7 +17,7 @@ public abstract class MixinOctavePerlinNoiseSampler {
     public static double maintainPrecision(double value) {
         double result =  switch (config.farLandsPos) {
             case BETA -> value;
-            case RELEASE -> value > Long.MAX_VALUE ? value - Long.MAX_VALUE : (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
+            case RELEASE -> Math.abs(value) > Long.MAX_VALUE ? value - Math.signum(value) * Long.MAX_VALUE : (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
             case REMOVED -> (value + 1.6777216E7D) % 3.3554432E7D - 1.6777216E7D;
             case CUSTOM -> value - (double) MathHelper.lfloor(value / config.maintainPrecisionCustomDivisor + (double) 0.5F) * config.maintainPrecisionCustomDivisor;
             default ->

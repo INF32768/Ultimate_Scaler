@@ -1,4 +1,4 @@
-version: '{build}'
+version: '0.3.0-rc1(build {build})'
 skip_tags: true
 clone_depth: 1
 environment:
@@ -9,7 +9,18 @@ cache:
 build_script:
   - cmd: gradlew build
 artifacts:
-  - path: .\build\libs\ultimate-scaler-0.3.0-pre3.jar
-    name: ultimate-scaler-0.3.0-pre3.jar
-  - path: .\build\libs\ultimate-scaler-0.3.0-pre3-sources.jar
-    name: ultimate-scaler-0.3.0-pre3-sources.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-rc1.jar
+    name: UltimateScaler-0.3.0-rc1.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-rc1-sources.jar
+    name: UltimateScaler-0.3.0-rc1-sources.jar
+deploy:
+  - provider: GitHub
+    tag: 0.3.0-rc1
+    release: 0.3.0-rc1
+    description: """
+    _This is a draft release._
+    """
+    auth_token:
+      secure: vk8X7M09af5EZiUitQqDhgWhOXFCkvUeXRrEbdSty0zlFhH+r5A2poHSDbPLKc+gCcNgXyCYQiMCaniWgFGIwn53cgP2TVm+G/djiyZVifw=
+    draft: true
+    prerelease: true

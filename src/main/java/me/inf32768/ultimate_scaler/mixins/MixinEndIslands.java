@@ -2,12 +2,15 @@ package me.inf32768.ultimate_scaler.mixins;
 
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.noise.SimplexNoiseSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import java.math.BigInteger;
@@ -39,7 +42,7 @@ public abstract class MixinEndIslands {
     }
     @ModifyVariable(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At("STORE"), ordinal = 5)
     private static int modifySampleZ2(int original, SimplexNoiseSampler sampler, int x, int z) {
-        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : 0;
+        return config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).remainder(BigInteger.TWO).intValue() : original;
     }
     @ModifyArgs(method = "sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;sqrt(F)F", ordinal = 0))
     private static void modifySqrt(Args args, SimplexNoiseSampler sampler, int x, int z) {
@@ -53,7 +56,7 @@ public abstract class MixinEndIslands {
                 double zDouble = Util.getDoubleOffsetPos(z, Direction.Axis.Z);
                 args.set(0, (float) (xDouble * xDouble + zDouble * zDouble));
             }
-        } else {
+        } else if (config.bigIntegerRewrite) {
             int offsetX = Util.getBigIntegerOffsetPos(x, Direction.Axis.X).divide(BigInteger.valueOf(8)).intValue();
             int offsetZ = Util.getBigIntegerOffsetPos(z, Direction.Axis.Z).divide(BigInteger.valueOf(8)).intValue();
             args.set(0, (float) (offsetX * offsetX + offsetZ * offsetZ));

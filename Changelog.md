@@ -180,3 +180,20 @@
 
 ### 漏洞修复 | Bug Fixes
 - 这里绝对没有漏洞，修个屁:D | There is absolutely no bugs, fix a f**king sh*t:D
+
+## 0.3.0-rc1 - 2025-8-7
+
+### 新特性 | New Features
+- 在选项界面中添加了常见问题。 | Added frequently asked questions to the options screen.
+- 现在AppVeyor构建版本将自动发布到GitHub Release。 | The AppVeyor build version will automatically release to GitHub Release.
+
+### 改进 | Improvements
+- 将“替换地底熔岩”移入实验性功能。 | Moved "Replace Underground Lava" to experimental features.
+- 向README.md添加了徽章和更多内容。 | Added badges and more content to README.md.
+- 替换了ObjectValueWriter.class中已弃用的方法。 | Replaced the deprecated methods in ObjectValueWriter.class.
+
+### 漏洞修复 | Bug Fixes
+- 修复了“修复末地环”选项仍需要开启BigInteger重写的问题。 | Fixed that the "Fix End Rings" option still requires BigInteger rewrite.
+- 修复了当边境之地位置为“RELEASE”时，噪声不会在负半轴上溢出的问题。 | Fixed that the noise would not overflow below the negative half-axis when the far lands position is set to "RELEASE".
+- 修复了同时进行缩放和偏移时，海平面和地底熔岩层的高度不正确的问题。 | Fixed that the height of the surface of the oceans and the underground lava layers was incorrect when scaling and offsetting at the same time.
+- 修复了当未启用BigInteger重写时，末地岛屿无法正确生成的问题。 | Fixed that the end islands were not generated correctly when BigInteger rewrite was not enabled.

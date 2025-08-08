@@ -21,8 +21,8 @@ public abstract class MixinNoiseChunkGenerator {
         cir.setReturnValue((x, y, z) -> {
             double scale = config.globalBigDecimalScale[1].doubleValue();
             double offset = config.globalBigDecimalOffset[1].doubleValue();
-            int lavaLevelY = config.extraYOffset ? (int) (-54D / scale - offset) : -54;
-            int seaLevelY = config.extraYOffset ? (int) (settings.seaLevel() / scale - offset) : settings.seaLevel();
+            int lavaLevelY = config.extraYOffset ? (int) ((-54D - offset) / scale) : -54;
+            int seaLevelY = config.extraYOffset ? (int) ((settings.seaLevel() - offset) / scale) : settings.seaLevel();
             AquiferSampler.FluidLevel lavaLevel = new AquiferSampler.FluidLevel(lavaLevelY, config.replaceUndergroundLava ? Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock)).getDefaultState() : Blocks.LAVA.getDefaultState());
             AquiferSampler.FluidLevel waterLevel = new AquiferSampler.FluidLevel(seaLevelY, config.replaceDefaultFluid ? Registries.BLOCK.get(Identifier.of(config.replaceDefaultFluidBlock)).getDefaultState() : settings.defaultFluid());
             return y < Math.min(lavaLevelY, seaLevelY) ? lavaLevel : waterLevel;

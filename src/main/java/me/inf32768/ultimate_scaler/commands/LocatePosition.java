@@ -1,6 +1,5 @@
 package me.inf32768.ultimate_scaler.commands;
 
-import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -12,6 +11,7 @@ import net.minecraft.text.Text;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -28,78 +28,99 @@ public class LocatePosition {
                 .then(argument("originalPos", StringArgumentType.string())
                     .then(argument("scale", DoubleArgumentType.doubleArg())
                         .then(argument("offset", DoubleArgumentType.doubleArg())
-                            .executes(context -> (int) calculate(StringArgumentType.getString(context, "originalPos"), DoubleArgumentType.getDouble(context, "scale"), DoubleArgumentType.getDouble(context, "offset"), 0, context))
-                            .then(argument("range", DoubleArgumentType.doubleArg())
-                                .executes(context -> (int) calculate(StringArgumentType.getString(context, "originalPos"), DoubleArgumentType.getDouble(context, "scale"), DoubleArgumentType.getDouble(context, "offset"), DoubleArgumentType.getDouble(context, "range"), context)))))))));
+                            .executes(context -> (int) calculate(StringArgumentType.getString(context, "originalPos"), DoubleArgumentType.getDouble(context, "scale"), DoubleArgumentType.getDouble(context, "offset"), "0", context))
+                            .then(argument("range", StringArgumentType.string())
+                                .executes(context -> (int) calculate(StringArgumentType.getString(context, "originalPos"), DoubleArgumentType.getDouble(context, "scale"), DoubleArgumentType.getDouble(context, "offset"), StringArgumentType.getString(context, "range"), context)))))))));
     }
 
-     public static double calculate(String originalPos, double scale, double offset, double range, CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        if (scale <= 0) {
-            throw SCALE_INVALID_EXCEPTION.create();
+    private static final BigInteger TWO = BigInteger.valueOf(2);
+    private static final BigInteger MAX_ITERATIONS = BigInteger.valueOf(100000);
+
+    public static double calculate(String originalPos, double scale, double offset, String rangeArg,
+                                   CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        // 参数校验
+        if (scale <= 0) throw SCALE_INVALID_EXCEPTION.create();
+
+        // 精确数值转换
+        BigDecimal originalPosBigDecimal = parseBigDecimal(originalPos);
+        BigDecimal scaleBigDecimal = new BigDecimal(scale);
+        BigDecimal offsetBigDecimal = new BigDecimal(offset);
+        BigDecimal searchRange = parseRange(rangeArg, originalPosBigDecimal, scaleBigDecimal, offsetBigDecimal);
+
+        // 二分查找逻辑
+        BigInteger[] result = binarySearch(originalPosBigDecimal, scaleBigDecimal, offsetBigDecimal, searchRange);
+
+        // 结果处理
+        return handleResult(result, context);
+    }
+
+    private static BigDecimal parseRange(String rangeArg, BigDecimal target, BigDecimal scale, BigDecimal offset)
+            throws CommandSyntaxException {
+        BigDecimal range = parseBigDecimal(rangeArg);
+
+        if (range.compareTo(BigDecimal.ZERO) == 0) {
+            return new BigDecimal(Double.MAX_VALUE)
+                    .divide(scale, 100, RoundingMode.HALF_UP)
+                    .subtract(offset);
         }
 
-        if (range < 0) {
-            throw RANGE_NEGATIVE_EXCEPTION.create();
+        if (range.compareTo(BigDecimal.ZERO) < 0) throw RANGE_NEGATIVE_EXCEPTION.create();
+        if (range.compareTo(new BigDecimal("1E+100")) > 0) throw RANGE_TOO_LARGE_EXCEPTION.create();
+
+        return range;
+    }
+
+    private static BigDecimal parseBigDecimal(String rangeArg) throws CommandSyntaxException {
+        try {
+            return new BigDecimal(rangeArg);
+        } catch (Exception e) {
+            throw LocatePosition.INVALID_DECIMAL_EXCEPTION.create();
         }
+    }
 
-         BigDecimal p;
-         try {
-             p = new BigDecimal(originalPos);
-         } catch (NumberFormatException e) {
-             throw INVALID_DECIMAL_EXCEPTION.createWithContext(new StringReader(e.getMessage()));
-         }
-         BigDecimal s = new BigDecimal(scale);
-        BigDecimal o = new BigDecimal(offset);
+    private static BigInteger[] binarySearch(BigDecimal target, BigDecimal scale, BigDecimal offset, BigDecimal range)
+            throws CommandSyntaxException {
+        BigInteger low = range.negate().toBigInteger();
+        BigInteger high = range.toBigInteger();
+        BigInteger iterations = BigInteger.ZERO;
 
-        if (range == 0) {
-            range = Double.MAX_VALUE / scale - offset;
-        }
-
-         BigDecimal r;
-         try {
-             r = new BigDecimal(range);
-         } catch (NumberFormatException e) {
-             throw RANGE_TOO_LARGE_EXCEPTION.createWithContext(new StringReader(e.getMessage()));
-         }
-
-         // 初始化二分查找的上下界
-        BigInteger low = r.toBigInteger().negate();
-        BigInteger high = low.negate(); // 假设一个足够大的上限
-
-        // 使用二分查找来找到满足条件的x的最小值
-        while (low.subtract(high).doubleValue() < -1) {
-            BigInteger mid = low.add(high).divide(BigInteger.valueOf(2));
-            BigDecimal midBigDecimal = new BigDecimal(mid);
-
-            // 计算mid * s + o
-            double resultDouble = midBigDecimal.doubleValue() * s.doubleValue() + o.doubleValue();
-            BigDecimal result = new BigDecimal(resultDouble);
-
-            // 检查是否满足result >= p
-            if (result.compareTo(p) >= 0) {
-                high = mid; // mid满足条件，尝试更小的x
-            } else {
-                low = mid.add(BigInteger.ONE); // mid不满足条件，尝试更大的x
+        while (high.subtract(low).compareTo(BigInteger.ONE) > 0) {
+            if (iterations.compareTo(MAX_ITERATIONS) > 0) {
+                throw RANGE_TOO_LARGE_EXCEPTION.create();
             }
+
+            BigInteger mid = low.add(high).divide(TWO);
+            BigDecimal midValue = new BigDecimal(mid)
+                    .multiply(scale)
+                    .add(offset)
+                    .setScale(target.scale(), RoundingMode.HALF_UP);
+
+            if (midValue.compareTo(target) >= 0) {
+                high = mid;
+            } else {
+                low = mid;
+            }
+
+            iterations = iterations.add(BigInteger.ONE);
         }
 
-        // 确保low是满足条件的最小值
-        BigDecimal lowBigDecimal = new BigDecimal(low);
-        BigDecimal result = lowBigDecimal.multiply(s).add(o);
+        return new BigInteger[]{low, high};
+    }
 
-        if (result.compareTo(p) < 0) {
-            low = low.add(BigInteger.ONE);
-        }
-        if (low.compareTo(r.toBigInteger()) > 0 || low.compareTo(r.toBigInteger().negate()) < 0 || result.compareTo(p) < 0) {
+    private static double handleResult(BigInteger[] result, CommandContext<ServerCommandSource> context)
+            throws CommandSyntaxException {
+        // 验证最终结果
+        if (result[1].compareTo(result[0].add(BigInteger.ONE)) != 0) {
             throw NOT_FOUND_EXCEPTION.create();
         }
 
-        BigInteger finalResult = low;
-        if (context == null) {
-            System.out.println("Located Position: " + finalResult);
-        } else {
-            context.getSource().sendFeedback(() -> Text.translatable("ultimate_scaler.commands.locate.pos.success", finalResult.toString()), false);
+        // 反馈结果
+        if (context != null) {
+            context.getSource().sendFeedback(
+                    () -> Text.translatable("ultimate_scaler.commands.locate.pos.success", result[1].toString()),
+                    false
+            );
         }
-        return finalResult.doubleValue();
+        return result[1].doubleValue();
     }
 }

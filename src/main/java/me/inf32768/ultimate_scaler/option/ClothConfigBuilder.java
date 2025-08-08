@@ -13,6 +13,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.registry.Registries;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -30,6 +32,7 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
 @Environment(EnvType.CLIENT)
 public class ClothConfigBuilder {
+
     @SuppressWarnings("UnstableApiUsage")
     public static ConfigBuilder getConfigBuilder() {
         ConfigBuilder builder = ConfigBuilder.create().setTitle(Text.translatable("ultimate_scaler.options"));
@@ -94,15 +97,7 @@ public class ClothConfigBuilder {
                 .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
                 .setDisplayRequirement(Requirement.all(replaceDefaultFluidEntry::getValue))
                 .build();
-        BooleanListEntry replaceUndergroundLavaEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava"), config.replaceUndergroundLava)
-                .setDefaultValue(false)
-                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava.tooltip"))
-                .build();
-        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
-                .setDefaultValue(Blocks.AIR)
-                .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
-                .setDisplayRequirement(Requirement.all(replaceUndergroundLavaEntry::getValue))
-                .build();
+
         worldGen.addEntry(worldGenHeader);
         worldGen.addEntry(farLandsPosEntry);
         worldGen.addEntry(maintainPrecisionCustomDivisorEntry);
@@ -112,8 +107,6 @@ public class ClothConfigBuilder {
         worldGen.addEntry(globalScaleEntry);
         worldGen.addEntry(replaceDefaultFluidEntry);
         worldGen.addEntry(replaceDefaultFluidBlockEntry);
-        worldGen.addEntry(replaceUndergroundLavaEntry);
-        worldGen.addEntry(replaceUndergroundLavaBlockEntry);
 
         SubCategoryBuilder experimental = entryBuilder.startSubCategory(Text.translatable("ultimate_scaler.options.worldgen.experimental"));
         TextListEntry experimentalHeader = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.worldgen.experimental.header").styled(s -> s.withBold(true).withColor(Formatting.RED))).build();
@@ -128,16 +121,27 @@ public class ClothConfigBuilder {
         BooleanListEntry fixEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings"), config.fixEndRings)
                 .setDefaultValue(false)
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip"))
-                .setDisplayRequirement(Requirement.all(bigIntegerRewriteEntry::getValue))
                 .build();
         BooleanListEntry extraYOffsetEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.extraYOffset"), config.extraYOffset)
                 .setDefaultValue(false)
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.extraYOffset.tooltip"))
                 .build();
+        BooleanListEntry replaceUndergroundLavaEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava"), config.replaceUndergroundLava)
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava.tooltip"))
+                .build();
+        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+                .setDefaultValue(Blocks.AIR)
+                .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
+                .setDisplayRequirement(Requirement.all(replaceUndergroundLavaEntry::getValue))
+                .build();
+
         experimental.add(experimentalHeader);
         experimental.add(bigIntegerRewriteEntry);
         experimental.add(fixEndRingsEntry);
         experimental.add(extraYOffsetEntry);
+        experimental.add(replaceUndergroundLavaEntry);
+        experimental.add(replaceUndergroundLavaBlockEntry);
         worldGen.addEntry(experimental.build());
 
         ConfigCategory fix = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.fix"));
@@ -156,6 +160,39 @@ public class ClothConfigBuilder {
             fix.addEntry(fixChunkGenerationOutOfBoundEntry);
         }
         fix.addEntry(expandDatapackValueRangeEntry);
+
+        ConfigCategory faq = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.faq"));
+        TextListEntry question1 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question1").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer1 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer1")).build();
+        TextListEntry question2 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question2").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer2 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer2")).build();
+        TextListEntry question3 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question3").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer3 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer3")).build();
+        TextListEntry question4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question4").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer4.1")
+                .append(Text.translatable("ultimate_scaler.options.faq.answer4.2").styled(s -> s.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.copy.click"))).withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/locate pos 1808764368955220359643137 8 1808764368955220359643137"))))
+                .append(Text.translatable("ultimate_scaler.options.faq.answer4.3"))).build();
+        TextListEntry question5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question5").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer5")).build();
+        TextListEntry question6 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question6").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer6 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer6")).build();
+        TextListEntry question7 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question7").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer7 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer7")).build();
+
+        faq.addEntry(question1);
+        faq.addEntry(answer1);
+        faq.addEntry(question2);
+        faq.addEntry(answer2);
+        faq.addEntry(question3);
+        faq.addEntry(answer3);
+        faq.addEntry(question4);
+        faq.addEntry(answer4);
+        faq.addEntry(question5);
+        faq.addEntry(answer5);
+        faq.addEntry(question6);
+        faq.addEntry(answer6);
+        faq.addEntry(question7);
+        faq.addEntry(answer7);
 
         builder.setSavingRunnable(() -> {
             try {

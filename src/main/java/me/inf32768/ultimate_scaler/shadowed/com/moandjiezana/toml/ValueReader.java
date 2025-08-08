@@ -14,7 +14,6 @@ interface ValueReader {
    * 
    * @param s  must already have been validated by {@link #canRead(String)}
    * @param index where to start in s
-   * @param line current line number, used for error reporting 
    * @return a value or a {@link Results.Errors}
    */
   Object read(String s, AtomicInteger index, Context context);

@@ -4,9 +4,12 @@
   "version": "${version}",
 
   "name": "Ultimate Scaler",
-  "description": "A Minecraft mod for scale the terrain generation.",
+  "description": "Provides some modification functions related to terrain generation",
   "authors": [
     "INF32768"
+  ],
+  "contributors": [
+    "SysWOWBrO3"
   ],
   "contact": {
     "homepage": "https://github.com/INF32768/UltimateScaler",
@@ -29,13 +32,12 @@
   "icon": "icon.png",
   "accessWidener": "ultimate_scaler.accessWidener",
   "depends": {
-    "fabric-api": ">=0.100.1",
     "fabricloader": ">=0.16.0",
-    "fabric": "*",
-    "minecraft": ">=1.21"
+    "minecraft": ">=1.21 <=1.21.8"
   },
   "suggests": {
     "modmenu": "*",
+    "fabric-api": ">=0.100.1",
     "cloth-config2": "*"
   }
 }

@@ -52,7 +52,7 @@ class ObjectValueWriter implements ValueWriter {
   }
 
   private static Object getFieldValue(Field field, Object o) {
-    boolean isAccessible = field.isAccessible();
+    boolean isAccessible = field.canAccess(o);
     field.setAccessible(true);
     Object value = null;
     try {

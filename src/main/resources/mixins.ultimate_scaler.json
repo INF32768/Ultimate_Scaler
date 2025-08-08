@@ -2,7 +2,7 @@
   "required": true,
   "package": "me.inf32768.ultimate_scaler.mixins",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "ultimate-scaler-refmap.json",
+  "refmap": "ultimate_scaler.refmap.json",
   "mixins": [
     "MixinAbstractChunkHolder",
     "MixinDensityFunctionTypes",
@@ -25,5 +25,5 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "plugin": "me.inf32768.ultimate_scaler.mixins.MixinConfigPlugin"
+  "plugin": "me.inf32768.ultimate_scaler.mixins.MixinsConfigPlugin"
 }

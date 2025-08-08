@@ -12,6 +12,7 @@ import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
 @Mixin(targets = "net.minecraft.world.gen.densityfunction.DensityFunctionTypes$Shift")
 public abstract class MixinShift {
+
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunctionTypes$Shift;sample(DDD)D"))
     private void modifyArgs(Args args, DensityFunction.NoisePos pos) {
         double x = config.bigIntegerRewrite ? Util.getBigIntegerOffsetPos(pos.blockX(), Direction.Axis.X).doubleValue() : Util.getDoubleOffsetPos(pos.blockX(), Direction.Axis.X);

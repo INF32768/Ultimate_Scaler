@@ -17,9 +17,9 @@ deploy:
   - provider: GitHub
     tag: 0.3.0-rc1
     release: 0.3.0-rc1
-    description: """
+    description: "
     _This is a draft release._
-    """
+    "
     auth_token:
       secure: vk8X7M09af5EZiUitQqDhgWhOXFCkvUeXRrEbdSty0zlFhH+r5A2poHSDbPLKc+gCcNgXyCYQiMCaniWgFGIwn53cgP2TVm+G/djiyZVifw=
     draft: true

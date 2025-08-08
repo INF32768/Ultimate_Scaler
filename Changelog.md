@@ -197,3 +197,11 @@
 - 修复了当边境之地位置为“RELEASE”时，噪声不会在负半轴上溢出的问题。 | Fixed that the noise would not overflow below the negative half-axis when the far lands position is set to "RELEASE".
 - 修复了同时进行缩放和偏移时，海平面和地底熔岩层的高度不正确的问题。 | Fixed that the height of the surface of the oceans and the underground lava layers was incorrect when scaling and offsetting at the same time.
 - 修复了当未启用BigInteger重写时，末地岛屿无法正确生成的问题。 | Fixed that the end islands were not generated correctly when BigInteger rewrite was not enabled.
+
+## 0.3.0-rc2 - 2025-8-8
+
+### 改进 | Improvements
+- 去除了无用的import。 | Removed unnecessary imports.
+
+### 漏洞修复 | Bug Fixes
+- 修复了AppVeyor无法构建的问题。 | Fixed that AppVeyor could not build.

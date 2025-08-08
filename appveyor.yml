@@ -1,4 +1,4 @@
-version: '0.3.0-rc1(build {build})'
+version: '0.3.0-rc2(build {build})'
 skip_tags: true
 clone_depth: 1
 environment:
@@ -9,19 +9,25 @@ cache:
 build_script:
   - cmd: gradlew build --no-daemon
 artifacts:
-  - path: .\build\libs\UltimateScaler-0.3.0-rc1.jar
-    name: UltimateScaler-0.3.0-rc1.jar
-  - path: .\build\libs\UltimateScaler-0.3.0-rc1-sources.jar
-    name: UltimateScaler-0.3.0-rc1-sources.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-rc2.jar
+    name: UltimateScaler-0.3.0-rc2.jar
+  - path: .\build\libs\UltimateScaler-0.3.0-rc2-sources.jar
+    name: UltimateScaler-0.3.0-rc2-sources.jar
 deploy:
   - provider: GitHub
-    tag: 0.3.0-rc1
-    release: 0.3.0-rc1
-    description: "
-    _This is a draft release._
-    "
+    tag: 0.3.0-rc2
+    release: 0.3.0-rc2
+    description: '
+# 0.3.0-rc2 - 2025-8-8
+
+## 改进 | Improvements
+- 去除了无用的import。 | Removed unnecessary imports.
+
+## 漏洞修复 | Bug Fixes
+- 修复了AppVeyor无法构建的问题。 | Fixed that AppVeyor could not build.
+'
     auth_token:
-      secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR
-    artifact: UltimateScaler-0.3.0-rc1.jar
+      secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR #有效期至2025-9-8
+    artifact: UltimateScaler-0.3.0-rc2.jar
     draft: true
     prerelease: true

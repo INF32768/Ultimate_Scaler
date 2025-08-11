@@ -7,7 +7,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler/master)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
+
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
 
 ## 介绍
 
@@ -53,9 +56,7 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 ### Minecraft版本
 
-本分支的Mod兼容Minecraft 1.21 - 1.21.8。
-
-（由于技术原因，运行在1.21 - 1.21.1版本的Mod无法使用配置界面）
+本Mod目前支持Minecraft 1.21 - 1.21.8。
 
 ### 其他Mod
 
@@ -72,7 +73,6 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 - 实现客户端和服务端的简单通信；
 - 禁用指定噪声：让指定噪声在采样时始终返回0；
 - 向下移植到1.18.2 ~ 1.19.3；
-- 让运行在1.21 - 1.21.1版本的Mod也能使用配置界面；
 - 新命令：`noiseinfo`，给定一个噪声的名称或定义，显示其相关信息（如值域、频率、溢出位置等）；
 - 将调试屏幕中过大的数值显示为科学计数法；
 - ✓ 偏移末地岛屿的生成；
@@ -85,6 +85,7 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 - ✓ 全局流体替换：在地形生成时替换指定的流体，防止流体过多导致游戏卡顿；
 - ✓ 向下移植到1.21 ~ 1.21.1；
 - ✓ 在选项界面中添加使用说明
+- ✓ 让运行在1.21 - 1.21.1版本的Mod也能使用配置界面；
 
 ### 中期计划
 

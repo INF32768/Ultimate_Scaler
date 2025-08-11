@@ -89,3 +89,19 @@
 - 修复了类 `MixinAbstractChunkHolder` 未被声明为抽象类的问题。 | Fixed that the class `MixinAbstractChunkHolder` was not declared as an abstract class.
 - 修复了修改后 `weird_scale_multiplier` 密度函数无法正常工作的问题。 | Fixed that the modified `weird_scale_multiplier` density function did not work properly.
 - 修复了当边境之地位置为`RELEASE`时，噪声不会在负半轴上溢出的问题。 | Fixed that the noise would not overflow below the negative half-axis when the far lands position is set to `RELEASE`.
+
+## 0.3.1 - 2025-8-11
+
+### 新特性 | New Features
+
+- 新增了两条常见问题。 | Added two frequently asked questions.
+
+### 改进 | Improvements
+
+- 创建了多个分支，用于支持不同版本的Minecraft。 | Created multiple branches to support different versions of Minecraft.
+- 移除了不必要的版本校验。 | Removed unnecessary version validation.
+- 替换了`README.md`中的一个徽章。 | Replaced one badge in `README.md`.
+- 升级了Gradle版本。 | Upgraded Gradle version.
+- 升级了Fabric Loader版本。 | Upgraded Fabric Loader version.
+- 整理了语言文件。 | Organized language files.
+- 为大多数分支启用了Minotaur和CurseGradle支持。 | Enabled Minotaur and CurseGradle support for most branches.

@@ -1,13 +1,18 @@
 # Ultimate Scaler
 
+<!-- modrinth_exclude.start -->
 **English** | [简体中文](README_CN.md)
+<!-- modrinth_exclude.end -->
 
 [![](https://s21.ax1x.com/2025/05/28/pVpUmYq.jpg)]()
 
 [![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler/master)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
+
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
 
 ## Introduction
 
@@ -19,6 +24,7 @@ This Mod is still in development, and new features are being added frequently. T
 
 **Warning: Please back up your save before using this Mod, and the author is not responsible for any damage or loss to your save caused by using this Mod!**
 
+<!-- modrinth_exclude.start -->
 ## Dependencies
 
 - [Fabric API](https://github.com/FabricMC/fabric): Provides Mod loading, configuration, and command functions.
@@ -53,9 +59,7 @@ The configuration file is located in `config/ultimate_scaler.toml`. After modify
 
 ### Minecraft Version
 
-This branch of the Mod is compatible with Minecraft 1.21 - 1.21.8.
-
-(Due to technical reasons, Mods running on 1.21 - 1.21.1 cannot use the option screen)
+This Mod currently supports Minecraft 1.21 - 1.21.8.
 
 ### Other Mods
 
@@ -69,7 +73,6 @@ This branch of the Mod is compatible with Minecraft 1.21 - 1.21.8.
 
 ### Short-term plan
 
-- Make the option screen available for Mods running on 1.21 - 1.21.1.
 - Implement simple communication between the client and the server.
 - Disable specified noise: Make specified noise always return 0 when sampling.
 - Port to 1.18.2 ~ 1.19.4.
@@ -85,6 +88,7 @@ This branch of the Mod is compatible with Minecraft 1.21 - 1.21.8.
 - ✓ Port to 1.21 ~ 1.21.1.
 - ✓ Offset the sea level and the underground lava layer.
 - ✓ Add usage instructions to the option interface.
+- ✓ Make the option screen available for Mods running on 1.21 - 1.21.1.
 
 ### Middle-term plan
 
@@ -111,6 +115,7 @@ This branch of the Mod is compatible with Minecraft 1.21 - 1.21.8.
 
 ## License
 
-This Mod is under the MIT license, and you can find the relevant information in the [LICENSE](LICENSE) file.
+This Mod is under the MIT license <!-- modrinth_exclude.start -->
+, and you can find the relevant information in the [LICENSE](LICENSE) file<!-- modrinth_exclude.end -->.
 
 This Mod uses the [toml4j](https://github.com/mwanji/toml4j) library, which is licensed under the MIT license.

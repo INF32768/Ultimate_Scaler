@@ -26,7 +26,7 @@ public class KeyBindings {
     }
 
     public static void init() {
-        if (UltimateScaler.IS_CLOTH_CONFIG_PRESENT && UltimateScaler.MC_VERSION >= 4080) {
+        if (UltimateScaler.IS_CLOTH_CONFIG_PRESENT) {
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
                 //不知道为什么，这里的KeyBinding.isPressed()只能检测到一个按键，所以只能用InputUtil.isKeyPressed()来判断组合按键是否被按下
                 if (InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), config.optionMenuKeyCode) && MinecraftClient.getInstance().currentScreen == null) {

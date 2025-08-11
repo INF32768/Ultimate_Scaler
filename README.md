@@ -7,7 +7,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler/master)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
 
 ## Introduction
 
@@ -53,9 +53,7 @@ The configuration file is located in `config/ultimate_scaler.toml`. After modify
 
 ### Minecraft Version
 
-This branch of the Mod is compatible with Minecraft 1.21 - 1.21.8.
-
-(Due to technical reasons, Mods running on 1.21 - 1.21.1 cannot use the option screen)
+This Mod currently supports Minecraft 1.21 - 1.21.8.
 
 ### Other Mods
 

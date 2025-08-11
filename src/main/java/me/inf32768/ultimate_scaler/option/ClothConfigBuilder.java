@@ -1,6 +1,5 @@
 package me.inf32768.ultimate_scaler.option;
 
-import me.inf32768.ultimate_scaler.UltimateScaler;
 import me.shedaniel.clothconfig2.api.*;
 import me.shedaniel.clothconfig2.gui.entries.*;
 import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
@@ -156,9 +155,7 @@ public class ClothConfigBuilder {
                 .requireRestart()
                 .build();
         fix.addEntry(fixHeader);
-        if (UltimateScaler.MC_VERSION >= 4080) {
-            fix.addEntry(fixChunkGenerationOutOfBoundEntry);
-        }
+        fix.addEntry(fixChunkGenerationOutOfBoundEntry);
         fix.addEntry(expandDatapackValueRangeEntry);
 
         ConfigCategory faq = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.faq"));
@@ -170,7 +167,7 @@ public class ClothConfigBuilder {
         TextListEntry answer3 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer3")).build();
         TextListEntry question4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question4").styled(s -> s.withColor(Formatting.BLUE))).build();
         TextListEntry answer4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer4.1")
-                .append(Text.translatable("ultimate_scaler.options.faq.answer4.2").styled(s -> s.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("chat.copy.click"))).withClickEvent(new ClickEvent(ClickEvent.Action.COPY_TO_CLIPBOARD, "/locate pos 1808764368955220359643137 8 1808764368955220359643137"))))
+                .append(Text.translatable("ultimate_scaler.options.faq.answer4.2").styled(s -> s.withHoverEvent(new HoverEvent.ShowText(Text.translatable("chat.copy.click"))).withClickEvent(new ClickEvent.CopyToClipboard("/locate pos 1808764368955220359643137 8 1808764368955220359643137"))))
                 .append(Text.translatable("ultimate_scaler.options.faq.answer4.3"))).build();
         TextListEntry question5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question5").styled(s -> s.withColor(Formatting.BLUE))).build();
         TextListEntry answer5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer5")).build();
@@ -178,6 +175,10 @@ public class ClothConfigBuilder {
         TextListEntry answer6 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer6")).build();
         TextListEntry question7 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question7").styled(s -> s.withColor(Formatting.BLUE))).build();
         TextListEntry answer7 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer7")).build();
+        TextListEntry question8 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question8").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer8 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer8")).build();
+        TextListEntry question9 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question9").styled(s -> s.withColor(Formatting.BLUE))).build();
+        TextListEntry answer9 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer9")).build();
 
         faq.addEntry(question1);
         faq.addEntry(answer1);
@@ -193,6 +194,10 @@ public class ClothConfigBuilder {
         faq.addEntry(answer6);
         faq.addEntry(question7);
         faq.addEntry(answer7);
+        faq.addEntry(question8);
+        faq.addEntry(answer8);
+        faq.addEntry(question9);
+        faq.addEntry(answer9);
 
         builder.setSavingRunnable(() -> {
             try {

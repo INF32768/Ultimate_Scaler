@@ -8,7 +8,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.MinecraftVersion;
 import net.minecraft.server.MinecraftServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +19,12 @@ public class UltimateScaler implements ModInitializer {
 public static final boolean IS_RUNNING_ON_CLIENT = FabricLoader.getInstance().getEnvironmentType().equals(EnvType.CLIENT);
 public static final boolean IS_CLOTH_CONFIG_PRESENT = FabricLoader.getInstance().isModLoaded("cloth-config2");
 public static final boolean IS_FABRIC_API_PRESENT = FabricLoader.getInstance().isModLoaded("fabric-api");
-public static final int MC_VERSION = MinecraftVersion.CURRENT.getSaveVersion().getId();
 public static MinecraftServer serverInstance;
 public static final Logger LOGGER = LoggerFactory.getLogger("ultimate_scaler");
 
     @Override
     public void onInitialize() {
-        ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-            serverInstance = server;
-        });
+        ServerLifecycleEvents.SERVER_STARTED.register(server -> serverInstance = server);
         if (IS_RUNNING_ON_CLIENT) {
             if (IS_FABRIC_API_PRESENT) {
                 KeyBindings.init();

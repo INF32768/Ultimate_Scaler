@@ -15,12 +15,10 @@ cache:
 build_script:
   - cmd: >-
       gradlew build --no-daemon
-      
-      gradlew curseforge --no-daemon
-      
-      gradlew modrinth --no-daemon
-      
-      gradlew modrinthSyncBody --no-daemon
+#
+#      gradlew curseforge --no-daemon
+#
+#      gradlew modrinth --no-daemon
 artifacts:
   - path: .\build\libs\UltimateScaler-$(VERSION).jar
     name: UltimateScaler-$(VERSION).jar

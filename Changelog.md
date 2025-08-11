@@ -105,3 +105,10 @@
 - 升级了Fabric Loader版本。 | Upgraded Fabric Loader version.
 - 整理了语言文件。 | Organized language files.
 - 为大多数分支启用了Minotaur和CurseGradle支持。 | Enabled Minotaur and CurseGradle support for most branches.
+
+## 0.3.1.1 - 2025-8-11
+
+### 漏洞修复 | Bug Fixes
+
+- 修复了某些平台上更新日志乱码的问题。 | Fixed a bug where the update log was garbled on some platforms.
+- 用`-`代替版本号中的`+`符号。 | Replaced the `+` sign in the version number with `-`.

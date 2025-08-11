@@ -9,6 +9,9 @@
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
 
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
+
 ## 介绍
 
 Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生成的修改功能，主要用于探索边境之地和各种与地形生成有关的距离现象。

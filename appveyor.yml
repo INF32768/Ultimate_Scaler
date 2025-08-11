@@ -5,7 +5,6 @@ environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
   VERSION: 0.3.1.1-1.21.5
   RELEASE_TYPE: release
-  CHANGELOG: '## 0.3.1 - 2025-8-11\n\n### \u65b0\u7279\u6027 | New Features\n\n- \u65b0\u589e\u4e86\u4e24\u6761\u5e38\u89c1\u95ee\u9898\u3002 | Added two frequently asked questions.\n\n### \u6539\u8fdb | Improvements\n\n- \u521b\u5efa\u4e86\u591a\u4e2a\u5206\u652f\uff0c\u7528\u4e8e\u652f\u6301\u4e0d\u540c\u7248\u672c\u7684Minecraft\u3002 | Created multiple branches to support different versions of Minecraft.\n- \u79fb\u9664\u4e86\u4e0d\u5fc5\u8981\u7684\u7248\u672c\u6821\u9a8c\u3002 | Removed unnecessary version validation.\n- \u66ff\u6362\u4e86`README.md`\u4e2d\u7684\u4e00\u4e2a\u5fbd\u7ae0\u3002 | Replaced one badge in `README.md`.\n- \u5347\u7ea7\u4e86Gradle\u7248\u672c\u3002 | Upgraded Gradle version.\n- \u5347\u7ea7\u4e86Fabric Loader\u7248\u672c\u3002 | Upgraded Fabric Loader version.\n- \u6574\u7406\u4e86\u8bed\u8a00\u6587\u4ef6\u3002 | Organized language files.\n- \u4e3a\u5927\u591a\u6570\u5206\u652f\u542f\u7528\u4e86Minotaur\u548cCurseGradle\u652f\u6301\u3002 | Enabled Minotaur and CurseGradle support for most branches.\n\n## 0.3.1.1 - 2025-8-11\n\n### \u6f0f\u6d1e\u4fee\u590d | Bug Fixes\n\n- \u4fee\u590d\u4e86\u67d0\u4e9b\u5e73\u53f0\u4e0a\u66f4\u65b0\u65e5\u5fd7\u4e71\u7801\u7684\u95ee\u9898\u3002 | Fixed a bug where the update log was garbled on some platforms.\n- \u7528`-`\u4ee3\u66ff\u7248\u672c\u53f7\u4e2d\u7684`+`\u7b26\u53f7\u3002 | Replaced the `+` sign in the version number with `-`.'
   MODRINTH_TOKEN:
     secure: TsbufWPo0KHWJvMF45poicdUr9g5333TCoJnOxfhD5kH7oM7zkboVn2ilHXVKdrIf8/S6GAGlUrsy2JRA/pPcFA+ela442QsFq/dzSrNuYQ= #有效期至2025-9-11
   CURSEFORGE_API_KEY:
@@ -31,7 +30,7 @@ deploy:
   - provider: GitHub
     tag: v$(VERSION)
     release: $(VERSION)
-    description: $(CHANGELOG)
+    description: '## 0.3.1 - 2025-8-11\n\n### 新特性 | New Features\n\n- 新增了两条常见问题。 | Added two frequently asked questions.\n\n### 改进 | Improvements\n\n- 创建了多个分支，用于支持不同版本的Minecraft。 | Created multiple branches to support different versions of Minecraft.\n- 移除了不必要的版本校验。 | Removed unnecessary version validation.\n- 替换了`README.md`中的一个徽章。 | Replaced one badge in `README.md`.\n- 升级了Gradle版本。 | Upgraded Gradle version.\n- 升级了Fabric Loader版本。 | Upgraded Fabric Loader version.\n- 整理了语言文件。 | Organized language files.\n- 为大多数分支启用了Minotaur和CurseGradle支持。 | Enabled Minotaur and CurseGradle support for most branches.\n\n## 0.3.1.1 - 2025-8-11\n\n### 漏洞修复 | Bug Fixes\n\n- 修复了某些平台上更新日志乱码的问题。 | Fixed a bug where the update log was garbled on some platforms.\n- 用`-`代替版本号中的`+`符号。 | Replaced the `+` sign in the version number with `-`.\n\n## 0.3.1.2 - 2025-8-11\n\n### 漏洞修复 | Bug Fixes\n\n- 再次尝试修复更新日志乱码的问题。 | Re-attempt to fix the update log garbled issue.\n- 将0.3.1.1的更新日志移入`BRANCH.Changelog.md`。 | Move the update log of 0.3.1.1 to `BRANCH.Changelog.md`.'
     auth_token:
       secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR #有效期至2025-9-8
     artifact: UltimateScaler-$(VERSION).jar

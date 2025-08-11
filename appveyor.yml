@@ -3,7 +3,7 @@ skip_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
-  VERSION: 0.3.1.1-1.21.5
+  VERSION: 0.3.1.2-1.21.5
   RELEASE_TYPE: release
   MODRINTH_TOKEN:
     secure: TsbufWPo0KHWJvMF45poicdUr9g5333TCoJnOxfhD5kH7oM7zkboVn2ilHXVKdrIf8/S6GAGlUrsy2JRA/pPcFA+ela442QsFq/dzSrNuYQ= #有效期至2025-9-11

@@ -7,7 +7,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dsti38xjw0jknojx?svg=true)](https://ci.appveyor.com/project/INF32768/ultimatescaler)
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler/master)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
+
+[![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
+[![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
 
 ## 介绍
 
@@ -53,9 +56,7 @@ Ultimate Scaler是一个Minecraft Fabric Mod，它提供了一些有关地形生
 
 ### Minecraft版本
 
-本分支的Mod兼容Minecraft 1.21 - 1.21.8。
-
-（由于技术原因，运行在1.21 - 1.21.1版本的Mod无法使用配置界面）
+本Mod目前支持Minecraft 1.21 - 1.21.8。
 
 ### 其他Mod
 

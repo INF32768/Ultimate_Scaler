@@ -3,7 +3,7 @@ skip_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
-  VERSION: 0.3.1-1.21
+  VERSION: 0.3.1.1-1.21
   RELEASE_TYPE: release
   MODRINTH_TOKEN:
     secure: TsbufWPo0KHWJvMF45poicdUr9g5333TCoJnOxfhD5kH7oM7zkboVn2ilHXVKdrIf8/S6GAGlUrsy2JRA/pPcFA+ela442QsFq/dzSrNuYQ= #有效期至2025-9-11
@@ -15,10 +15,10 @@ cache:
 build_script:
   - cmd: >-
       gradlew build --no-daemon
-#
-#      gradlew curseforge --no-daemon
-#
-#      gradlew modrinth --no-daemon
+
+      gradlew curseforge --no-daemon
+
+      gradlew modrinth --no-daemon
 artifacts:
   - path: .\build\libs\UltimateScaler-$(VERSION).jar
     name: UltimateScaler-$(VERSION).jar
@@ -28,7 +28,7 @@ deploy:
   - provider: GitHub
     tag: v$(VERSION)
     release: $(VERSION)
-    description: '## 0.3.1 - 2025-8-11\n\n### 新特性 | New Features\n\n- 新增了两条常见问题。 | Added two frequently asked questions.\n\n### 改进 | Improvements\n\n- 创建了多个分支，用于支持不同版本的Minecraft。 | Created multiple branches to support different versions of Minecraft.\n- 移除了不必要的版本校验。 | Removed unnecessary version validation.\n- 替换了`README.md`中的一个徽章。 | Replaced one badge in `README.md`.\n- 升级了Gradle版本。 | Upgraded Gradle version.\n- 升级了Fabric Loader版本。 | Upgraded Fabric Loader version.\n- 整理了语言文件。 | Organized language files.\n- 为大多数分支启用了Minotaur和CurseGradle支持。 | Enabled Minotaur and CurseGradle support for most branches.'
+    description: '## 0.3.1.1 - 2025-8-12\n\n### 漏洞修复 | Bug Fixes\n\n- ※ 修复了加载世界时崩溃的问题。 | Fixed a crash when loading a world.\n- 修复了类`MixinTitleScreen`未被声明为抽象的问题。 | Fixed `MixinTitleScreen` not being declared as abstract.'
     auth_token:
       secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR #有效期至2025-9-8
     artifact: UltimateScaler-$(VERSION).jar

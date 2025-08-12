@@ -74,7 +74,7 @@ This Mod currently supports Minecraft 1.21 - 1.21.8.
 
 ### Short-term plan
 
-- Make the option screen available for Mods running on 1.21 - 1.21.1.
+- Port to 1.21.9. 
 - Implement simple communication between the client and the server.
 - Disable specified noise: Make specified noise always return 0 when sampling.
 - Port to 1.18.2 ~ 1.19.4.
@@ -89,7 +89,8 @@ This Mod currently supports Minecraft 1.21 - 1.21.8.
 - ✓ Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
 - ✓ Port to 1.21 ~ 1.21.1.
 - ✓ Offset the sea level and the underground lava layer.
-- ✓ Add usage instructions to the option interface.
+- ✓ Add frequently asked questions (FAQ) to the option interface.
+- ✓ Make the option screen available for Mods running on 1.21 - 1.21.1.
 
 ### Middle-term plan
 

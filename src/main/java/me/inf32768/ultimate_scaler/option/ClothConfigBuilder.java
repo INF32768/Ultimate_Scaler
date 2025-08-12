@@ -145,17 +145,12 @@ public class ClothConfigBuilder {
 
         ConfigCategory fix = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.fix"));
         TextListEntry fixHeader = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.fix.header").styled(s -> s.withBold(true).withColor(Formatting.YELLOW))).build();
-        BooleanListEntry fixChunkGenerationOutOfBoundEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound"), config.fixChunkGenerationOutOfBound)
-                .setDefaultValue(true)
-                .setTooltip(Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound.tooltip"))
-                .build();
         BooleanListEntry expandDatapackValueRangeEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange"), config.expandDatapackValueRange)
                 .setDefaultValue(true)
                 .setTooltip(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.1").append(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.2").styled(s -> s.withColor(Formatting.GOLD))))
                 .requireRestart()
                 .build();
         fix.addEntry(fixHeader);
-        fix.addEntry(fixChunkGenerationOutOfBoundEntry);
         fix.addEntry(expandDatapackValueRangeEntry);
 
         ConfigCategory faq = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.faq"));
@@ -220,7 +215,6 @@ public class ClothConfigBuilder {
             config.extraYOffset = extraYOffsetEntry.getValue();
             config.bigIntegerRewrite = bigIntegerRewriteEntry.getValue();
             config.fixEndRings = fixEndRingsEntry.getValue();
-            config.fixChunkGenerationOutOfBound = fixChunkGenerationOutOfBoundEntry.getValue();
             config.expandDatapackValueRange = expandDatapackValueRangeEntry.getValue();
             try {
                 UltimateScalerOptions.saveConfig();

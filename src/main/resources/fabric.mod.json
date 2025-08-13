@@ -33,7 +33,7 @@
   "accessWidener": "ultimate_scaler.accessWidener",
   "depends": {
     "fabricloader": "*",
-    "minecraft": ">=1.21.5 <=1.21.8"
+    "minecraft": "*"
   },
   "suggests": {
     "modmenu": "*",

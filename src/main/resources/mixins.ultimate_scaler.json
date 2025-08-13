@@ -24,5 +24,6 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "plugin" : "me.inf32768.ultimate_scaler.mixins.MixinConfigPlugin"
 }

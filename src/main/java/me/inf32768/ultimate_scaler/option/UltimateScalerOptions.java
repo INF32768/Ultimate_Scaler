@@ -2,6 +2,7 @@ package me.inf32768.ultimate_scaler.option;
 
 import me.inf32768.ultimate_scaler.UltimateScaler;
 import me.inf32768.ultimate_scaler.shadowed.com.moandjiezana.toml.Toml;
+import me.inf32768.ultimate_scaler.util.VersionHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
@@ -96,7 +97,9 @@ public final class UltimateScalerOptions {
         ConfigManager.writeEntry(CONFIG_PATH, "extraYOffset", config.extraYOffset, new String[] {Text.translatable("ultimate_scaler.options.worldgen.extraYOffset").getString(), Text.translatable("ultimate_scaler.options.worldgen.extraYOffset.tooltip").getString()});
         ConfigManager.writeEntry(CONFIG_PATH, "bigIntegerRewrite", config.bigIntegerRewrite, new String[] {Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite").getString(), Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.1").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.2").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.3").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.4").getString()});
         ConfigManager.writeEntry(CONFIG_PATH, "fixEndRings", config.fixEndRings, new String[] {Text.translatable("ultimate_scaler.options.worldgen.fixEndRings").getString(), Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip").getString()});
-        ConfigManager.writeEntry(CONFIG_PATH, "fixChunkGenerationOutOfBound", config.fixChunkGenerationOutOfBound, new String[] {Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound").getString(), Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound.tooltip").getString()});
+        if (VersionHelper.isVersionAtLeast("1.21.2")) {
+            ConfigManager.writeEntry(CONFIG_PATH, "fixChunkGenerationOutOfBound", config.fixChunkGenerationOutOfBound, new String[] {Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound").getString(), Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound.tooltip").getString()});
+        }
         ConfigManager.writeEntry(CONFIG_PATH, "expandDatapackValueRange", config.expandDatapackValueRange, new String[] {Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange").getString(), Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.1").getString() + Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.2").getString()});
         ConfigManager.writeEntry(CONFIG_PATH, "publicTerrainPos", config.publicTerrainPos, new String[] {Text.translatable("ultimate_scaler.options.server.publicTerrainPos").getString()});
     }

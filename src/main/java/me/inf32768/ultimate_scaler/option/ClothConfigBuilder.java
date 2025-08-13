@@ -1,5 +1,8 @@
 package me.inf32768.ultimate_scaler.option;
 
+import me.inf32768.ultimate_scaler.util.RegistryAccessor;
+import me.inf32768.ultimate_scaler.util.TextEventFactory;
+import me.inf32768.ultimate_scaler.util.VersionHelper;
 import me.shedaniel.clothconfig2.api.*;
 import me.shedaniel.clothconfig2.gui.entries.*;
 import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
@@ -12,8 +15,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.registry.Registries;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -91,7 +92,7 @@ public class ClothConfigBuilder {
                 .setDefaultValue(false)
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceDefaultFluid.tooltip"))
                 .build();
-        DropdownBoxEntry<Block> replaceDefaultFluidBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceDefaultFluidBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+        DropdownBoxEntry<Block> replaceDefaultFluidBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceDefaultFluidBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
                 .setDefaultValue(Blocks.AIR)
                 .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
                 .setDisplayRequirement(Requirement.all(replaceDefaultFluidEntry::getValue))
@@ -129,7 +130,7 @@ public class ClothConfigBuilder {
                 .setDefaultValue(false)
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.replaceUndergroundLava.tooltip"))
                 .build();
-        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(Registries.BLOCK.get(Identifier.of(config.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
+        DropdownBoxEntry<Block> replaceUndergroundLavaBlockEntry = entryBuilder.startDropdownMenu(Text.empty(), DropdownMenuBuilder.TopCellElementBuilder.ofBlockObject(RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceUndergroundLavaBlock))), DropdownMenuBuilder.CellCreatorBuilder.ofBlockObject())
                 .setDefaultValue(Blocks.AIR)
                 .setSelections(Registries.BLOCK.stream().sorted(Comparator.comparing(Block::toString)).collect(Collectors.toCollection(LinkedHashSet::new)))
                 .setDisplayRequirement(Requirement.all(replaceUndergroundLavaEntry::getValue))
@@ -155,7 +156,9 @@ public class ClothConfigBuilder {
                 .requireRestart()
                 .build();
         fix.addEntry(fixHeader);
-        fix.addEntry(fixChunkGenerationOutOfBoundEntry);
+        if (VersionHelper.isVersionAtLeast("1.21.2")) {
+            fix.addEntry(fixChunkGenerationOutOfBoundEntry);
+        }
         fix.addEntry(expandDatapackValueRangeEntry);
 
         ConfigCategory faq = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.faq"));
@@ -167,7 +170,7 @@ public class ClothConfigBuilder {
         TextListEntry answer3 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer3")).build();
         TextListEntry question4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question4").styled(s -> s.withColor(Formatting.BLUE))).build();
         TextListEntry answer4 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer4.1")
-                .append(Text.translatable("ultimate_scaler.options.faq.answer4.2").styled(s -> s.withHoverEvent(new HoverEvent.ShowText(Text.translatable("chat.copy.click"))).withClickEvent(new ClickEvent.CopyToClipboard("/locate pos 1808764368955220359643137 8 1808764368955220359643137"))))
+                .append(Text.translatable("ultimate_scaler.options.faq.answer4.2").styled(s -> s.withHoverEvent(TextEventFactory.createShowTextEvent(Text.translatable("chat.copy.click"))).withClickEvent(TextEventFactory.createCopyEvent("/locate pos 1808764368955220359643137 8 1808764368955220359643137"))))
                 .append(Text.translatable("ultimate_scaler.options.faq.answer4.3"))).build();
         TextListEntry question5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question5").styled(s -> s.withColor(Formatting.BLUE))).build();
         TextListEntry answer5 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.answer5")).build();

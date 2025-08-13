@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.io.IOException;
 
 @Mixin(TitleScreen.class)
-public class MixinTitleScreen {
+public abstract class MixinTitleScreen {
     //客户端更新配置文件
     @Inject(method = "init", at = @At("HEAD"))
     private void modifyTitleScreen(CallbackInfo info) {

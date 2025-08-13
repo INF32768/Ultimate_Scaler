@@ -105,3 +105,15 @@
 - 升级了Fabric Loader版本。 | Upgraded Fabric Loader version.
 - 整理了语言文件。 | Organized language files.
 - 为大多数分支启用了Minotaur和CurseGradle支持。 | Enabled Minotaur and CurseGradle support for most branches.
+
+## 0.3.2 - 2025-8-13
+
+### 改进 | Improvements
+
+- 由于使用了新的版本管理策略和兼容代码，此分支向下兼容到1.21，并撤销了其他分支。 | This branch is now compatible down to 1.21, and all other branches have been cancelled.
+- 现在使用`@Inject`注解而非`@Overwrite`注解来修改`maintainPrecision`方法。 | Now using `@Inject` annotation instead of `@Overwrite` annotation to modify `maintainPrecision` method.
+
+### 漏洞修复 | Bug Fixes
+
+- 修复了“扩展数据包字面量取值范围”无法扩展数值下限的问题。 | Fixed that the "Extend the literal value range of datapacks" option could not extend the lower limit of the value.
+- 修复了上传到CurseForge的版本无法正常运行的问题。 | Fixed that the uploaded version to CurseForge could not run properly.

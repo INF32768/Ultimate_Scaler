@@ -1,9 +1,10 @@
-package me.inf32768.ultimate_scaler.mixins;
+package me.inf32768.ultimate_scaler.mixins.offset;
 
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.noise.SimplexNoiseSampler;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
+import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -13,10 +14,8 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import java.math.BigInteger;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
-
-@Mixin(targets = "net.minecraft.world.gen.densityfunction.DensityFunctionTypes$EndIslands")
+@Mixin(DensityFunctionTypes.EndIslands.class)
 public abstract class MixinEndIslands {
-
     @ModifyArgs(method = "sample(Lnet/minecraft/world/gen/densityfunction/DensityFunction$NoisePos;)D", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunctionTypes$EndIslands;sample(Lnet/minecraft/util/math/noise/SimplexNoiseSampler;II)F"))
     private void modifyNoisePos(Args args, DensityFunction.NoisePos pos) {
         if (config.bigIntegerRewrite) {

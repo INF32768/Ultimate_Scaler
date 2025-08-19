@@ -1,4 +1,4 @@
-package me.inf32768.ultimate_scaler.mixins;
+package me.inf32768.ultimate_scaler;
 
 import me.inf32768.ultimate_scaler.util.VersionHelper;
 import org.objectweb.asm.tree.ClassNode;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class MixinConfigPlugin implements IMixinConfigPlugin {
+public final class MixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
 
@@ -21,7 +21,19 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        return !mixinClassName.equals("me.inf32768.ultimate_scaler.mixins.MixinAbstractChunkHolder") || VersionHelper.isVersionAtLeast("1.21.2");
+        if (VersionHelper.isVersionAtLeast("1.21.2")) {
+            if (mixinClassName.contains("MixinEntityBefore1_21_2")) return false;
+        } else {
+            if (mixinClassName.contains("MixinAbstractChunkHolder")) return false;
+        }
+
+        if (VersionHelper.isVersionAtLeast("1.21.9")) {
+            if (mixinClassName.contains("MixinDebugHud")) return false;
+        } else {
+            if (mixinClassName.contains("MixinChunkGenerationStatsDebugHudEntry")) return false;
+        }
+
+        return true;
     }
 
     @Override

@@ -118,10 +118,6 @@ public class ClothConfigBuilder {
                         .append(Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.4").styled(s -> s.withColor(Formatting.GREEN)))
                 )
                 .build();
-        BooleanListEntry fixEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings"), config.fixEndRings)
-                .setDefaultValue(false)
-                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip"))
-                .build();
         BooleanListEntry extraYOffsetEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.extraYOffset"), config.extraYOffset)
                 .setDefaultValue(false)
                 .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.extraYOffset.tooltip"))
@@ -138,28 +134,41 @@ public class ClothConfigBuilder {
 
         experimental.add(experimentalHeader);
         experimental.add(bigIntegerRewriteEntry);
-        experimental.add(fixEndRingsEntry);
         experimental.add(extraYOffsetEntry);
         experimental.add(replaceUndergroundLavaEntry);
         experimental.add(replaceUndergroundLavaBlockEntry);
         worldGen.addEntry(experimental.build());
 
-        ConfigCategory fix = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.fix"));
-        TextListEntry fixHeader = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.fix.header").styled(s -> s.withBold(true).withColor(Formatting.YELLOW))).build();
-        BooleanListEntry fixChunkGenerationOutOfBoundEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound"), config.fixChunkGenerationOutOfBound)
-                .setDefaultValue(true)
-                .setTooltip(Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound.tooltip"))
+        ConfigCategory tweaks = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.tweaks"));
+        BooleanListEntry fixEndRingsEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings"), config.fixEndRings)
+                .setDefaultValue(false)
+                .setTooltip(Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip"))
                 .build();
-        BooleanListEntry expandDatapackValueRangeEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange"), config.expandDatapackValueRange)
+        BooleanListEntry fixChunkGenerationOutOfBoundEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.tweaks.fixChunkGenerationOutOfBound"), config.fixChunkGenerationOutOfBound)
                 .setDefaultValue(true)
-                .setTooltip(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.1").append(Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.2").styled(s -> s.withColor(Formatting.GOLD))))
+                .setTooltip(Text.translatable("ultimate_scaler.options.tweaks.fixChunkGenerationOutOfBound.tooltip"))
+                .build();
+        BooleanListEntry expandDatapackValueRangeEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.tweaks.expandDatapackValueRange"), config.expandDatapackValueRange)
+                .setDefaultValue(true)
+                .setTooltip(Text.translatable("ultimate_scaler.options.tweaks.expandDatapackValueRange.tooltip").append(Text.translatable("ultimate_scaler.options.require_restart").styled(s -> s.withColor(Formatting.GOLD))))
                 .requireRestart()
                 .build();
-        fix.addEntry(fixHeader);
+        BooleanListEntry expandWorldBorderEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.tweaks.expandWorldBorder"), config.expandWorldBorder)
+                .setDefaultValue(true)
+                .setTooltip(Text.translatable("ultimate_scaler.options.tweaks.expandWorldBorder.tooltip").append(Text.translatable("ultimate_scaler.options.require_restart").styled(s -> s.withColor(Formatting.GOLD))))
+                .requireRestart()
+                .build();
+        BooleanListEntry fixMineshaftCannotGenerateEntry = entryBuilder.startBooleanToggle(Text.translatable("ultimate_scaler.options.tweaks.fixMineshaftCannotGenerate"), config.fixMineshaftCannotGenerate)
+                .setDefaultValue(true)
+                .setTooltip(Text.translatable("ultimate_scaler.options.tweaks.fixMineshaftCannotGenerate.tooltip"))
+                .build();
+        tweaks.addEntry(fixEndRingsEntry);
         if (VersionHelper.isVersionAtLeast("1.21.2")) {
-            fix.addEntry(fixChunkGenerationOutOfBoundEntry);
+            tweaks.addEntry(fixChunkGenerationOutOfBoundEntry);
         }
-        fix.addEntry(expandDatapackValueRangeEntry);
+        tweaks.addEntry(expandDatapackValueRangeEntry);
+        tweaks.addEntry(expandWorldBorderEntry);
+        tweaks.addEntry(fixMineshaftCannotGenerateEntry);
 
         ConfigCategory faq = builder.getOrCreateCategory(Text.translatable("ultimate_scaler.options.faq"));
         TextListEntry question1 = entryBuilder.startTextDescription(Text.translatable("ultimate_scaler.options.faq.question1").styled(s -> s.withColor(Formatting.BLUE))).build();
@@ -225,6 +234,8 @@ public class ClothConfigBuilder {
             config.fixEndRings = fixEndRingsEntry.getValue();
             config.fixChunkGenerationOutOfBound = fixChunkGenerationOutOfBoundEntry.getValue();
             config.expandDatapackValueRange = expandDatapackValueRangeEntry.getValue();
+            config.expandWorldBorder = expandWorldBorderEntry.getValue();
+            config.fixMineshaftCannotGenerate = fixMineshaftCannotGenerateEntry.getValue();
             try {
                 UltimateScalerOptions.saveConfig();
             } catch (IOException e) {

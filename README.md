@@ -10,6 +10,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/INF32768/UltimateScaler)
 ![GitHub License](https://img.shields.io/github/license/INF32768/UltimateScaler)
 [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/INF32768/UltimateScaler)](https://github.com/INF32768/ultimatescaler)
+![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/1323296)
 
 [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1323296?style=for-the-badge&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/ultimate-scaler)
 [![Modrinth Downloads](https://img.shields.io/modrinth/dt/ktrA4Qtm?style=for-the-badge&logo=modrinth)](https://www.modrinth.com/mod/ultimate-scaler)
@@ -46,6 +47,7 @@ This Mod is still in development, and new features are being added frequently. T
     - `y_clamped_gradient`(optional).
   - Sea level and underground lava layer(optional).
   - If the "BigInteger rewrite"(_Experimental_) option is enabled, the `end_islands` density function can be offset, and other content can be offset accurately.
+- Extend the world border.
 - Modify the `maintainPrecision` method, which implements the modification of the position of the far lands, and other functions such as removing the fringe lands;
 - The `locate pos` command, which can be used to locate the coordinates of a specific position after offset.
 - Fix various bugs in the original terrain generation algorithms.
@@ -60,7 +62,7 @@ The configuration file is located in `config/ultimate_scaler.toml`. After modify
 
 ### Minecraft Version
 
-This Mod currently supports Minecraft 1.21 - 1.21.8.
+This Mod currently supports Minecraft 1.21 - 1.21.9 (25w33a).
 
 ### Other Mods
 
@@ -74,42 +76,42 @@ This Mod currently supports Minecraft 1.21 - 1.21.8.
 
 ### Short-term plan
 
-- Port to 1.21.9.
-- Implement simple communication between the client and the server.
-- Disable specified noise: Make specified noise always return 0 when sampling.
-- Port to 1.18.2 ~ 1.19.4.
-- New command: `noiseinfo`, which displays information related to a noise (such as value range, frequency, overflow position) when given a name or definition.
-- Change the display of large values in the debugging screen to scientific notation.
-- ✓ Add comments to the configuration file.
-- ✓ Compatible with the server.
-- ✓ Offset the generation of the end island.
-- ✓ Offset the density function `weird_scaled_sampler`.
-- ✓ Rewrite the "noise" density function using BigInteger.
-- ✓ Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
-- ✓ Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
-- ✓ Port to 1.21 ~ 1.21.1.
-- ✓ Offset the sea level and the underground lava layer.
-- ✓ Add usage instructions to the option interface.
-- ✓ Make the option screen available for Mods running on 1.21 - 1.21.1.
+- [ ] Implement simple communication between the client and the server.
+- [ ] Disable specified noise: Make specified noise always return 0 when sampling.
+- [ ] Port to 1.18.2 ~ 1.19.4.
+- [ ] New command: `noiseinfo`, which displays information related to a noise (such as value range, frequency, overflow position) when given a name or definition.
+- [ ] Change the display of large values in the debugging screen to scientific notation.
+- [x] Add comments to the configuration file.
+- [x] Compatible with the server.
+- [x] Offset the generation of the end island.
+- [x] Offset the density function `weird_scaled_sampler`.
+- [x] Rewrite the "noise" density function using BigInteger.
+- [x] Automatically adjust the display of `TerrainPos` in the debugging screen according to the current offset mode.
+- [x] Global fluid replacement: Replace specified fluids during terrain generation to prevent the game from lagging due to too many fluids.
+- [x] Port to 1.21 ~ 1.21.1.
+- [x] Offset the sea level and the underground lava layer.
+- [x] Add usage instructions to the option interface.
+- [x] Make the option screen available for Mods running on 1.21 - 1.21.1.
+- [x] Port to 1.21.9.
 
 ### Middle-term plan
 
-- Port to 1.18.1 and below versions.
-- Port to Forge loader.
-- Add terrain generation algorithms of different versions of Java Edition, such as 1.18.1, 1.12.2, Beta version, and so on, up to Pre-Classic version.
-- Fix various bugs that occur when the coordinates exceed 33554432, such as crashes, blocks not rendering, and lighting effects abnormalities.
-- Generate sky grids in the fringe lands.
-- Remove the air walls at 30000000.
-- Add "Quit without saving" feature.
-- Prevent the game from crashing when chunk generation fails.
+- [ ] Port to 1.18.1 and below versions.
+- [ ] Port to Forge loader.
+- [ ] Add terrain generation algorithms of different versions of Java Edition, such as 1.18.1, 1.12.2, Beta version, and so on, up to Pre-Classic version.
+- [ ] Fix various bugs that occur when the coordinates exceed 33554432, such as crashes, blocks not rendering, and lighting effects abnormalities.
+- [ ] Generate sky grids in the fringe lands.
+- [ ] Add "Quit without saving" feature.
+- [ ] Prevent the game from crashing when chunk generation fails.
+- [x] Remove the air walls at 30000000.
 
 ### Long-term plan
 
-- Rewrite the terrain generation algorithm using BigInteger, which can offset more terrain generation, including structures and other features, and the mod will probably release 1.0 version at that time.
-- Add Minecraft Bedrock version of terrain generation algorithm, including old versions.
-- Link with a minimap mod (not determined yet) and draw the noise and density function graphic on the map.
-- Bypass the 32-bit integer limit, 64-bit integer limit, single-precision floating-point number limit, and even double-precision floating-point number limit in the world boundary, and the mod will probably release 2.0 version and change the name at that time.
-- Bypass the Y-axis limit and support the generation of terrain with a height of 2147483647 (possibly higher).
+- [ ] Rewrite the terrain generation algorithm using BigInteger, which can offset more terrain generation, including structures and other features, and the mod will probably release 1.0 version at that time.
+- [ ] Add Minecraft Bedrock version of terrain generation algorithm, including old versions.
+- [ ] Link with a minimap mod (not determined yet) and draw the noise and density function graphic on the map.
+- [ ] Bypass the 32-bit integer limit, 64-bit integer limit, single-precision floating-point number limit, and even double-precision floating-point number limit in the world boundary, and the mod will probably release 2.0 version and change the name at that time.
+- [ ] Bypass the Y-axis limit and support the generation of terrain with a height of 2147483647 (possibly higher).
 
 ## Special thanks
 

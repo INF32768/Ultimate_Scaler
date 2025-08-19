@@ -1,4 +1,4 @@
-package me.inf32768.ultimate_scaler.mixins;
+package me.inf32768.ultimate_scaler.mixins.offset;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.Registries;

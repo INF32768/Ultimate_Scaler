@@ -117,3 +117,26 @@
 
 - 修复了“扩展数据包字面量取值范围”无法扩展数值下限的问题。 | Fixed that the "Extend the literal value range of datapacks" option could not extend the lower limit of the value.
 - 修复了上传到CurseForge的版本无法正常运行的问题。 | Fixed that the uploaded version to CurseForge could not run properly.
+
+## 0.3.3 - 2025-8-19
+
+### 新特性 | New Features
+
+- 新增了扩展世界边界的功能。 | Added the ability to extend the world border.
+- 新增了修复废弃矿井在极大坐标下无法生成导致游戏崩溃的功能。 | Added the ability to fix the crash caused by generating mineshafts in extremely large coordinates.
+- 移植到1.21.9（25w33a）。 | Ported to 1.21.9 (25w33a).
+- 在`README.md`中添加了显示兼容版本的徽章。 | Added a badge to show compatible versions in `README.md`.
+
+### 改进 | Improvements
+
+- 不再要求Fabric Loader的版本高于0.17.0。 | No longer requires Fabric Loader version higher than 0.17.0.
+- 整理了Mixin类。 | Organized Mixin classes.
+- 把“‘修复’ 选项”更改为“实用调整”，并将“修复‘末地环’”功能移入。 | Changed "'Fix' option" to "Useful tweaks", and moved the "Fix End Rings" feature into it.
+- 升级构建环境到Fabric Loom 1.11-SNAPSHOT。 | Upgraded build environment to Fabric Loom 1.11-SNAPSHOT.
+- 现在使用accessWidener来访问内部protected类。 | Now using accessWidener to access internal protected classes.
+- 配置文件版本号现在是3。 | The configuration file version number is now 3.
+- 现在使用Makedown的“任务列表”功能来管理更新计划。 | Now using the "Task List" feature of Makedown to manage the update plan.
+
+### 漏洞修复 | Bug Fixes
+
+- 修复了上一版本未指定Minecraft版本的问题。 | Fixed that the previous version did not specify the Minecraft version.

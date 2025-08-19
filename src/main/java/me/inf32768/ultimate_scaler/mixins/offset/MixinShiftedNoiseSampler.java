@@ -1,8 +1,9 @@
-package me.inf32768.ultimate_scaler.mixins;
+package me.inf32768.ultimate_scaler.mixins.offset;
 
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.gen.densityfunction.DensityFunction;
+import net.minecraft.world.gen.densityfunction.DensityFunctionTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
 
-@Mixin(targets = "net.minecraft.world.gen.densityfunction.DensityFunctionTypes$ShiftedNoise")
+@Mixin(DensityFunctionTypes.ShiftedNoise.class)
 public abstract class MixinShiftedNoiseSampler {
     @ModifyArgs(method = "sample", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/densityfunction/DensityFunction$Noise;sample(DDD)D"))
     private void modifyNoiseSampleArgs(Args args, DensityFunction.NoisePos pos) {

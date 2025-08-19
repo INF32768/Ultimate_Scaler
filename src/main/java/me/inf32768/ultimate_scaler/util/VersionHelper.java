@@ -1,12 +1,11 @@
 package me.inf32768.ultimate_scaler.util;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.impl.game.minecraft.McVersionLookup;
 
 public class VersionHelper {
     private VersionHelper() {}
 
-    public static final String CURRENT_VERSION = McVersionLookup.getRelease(FabricLoader.getInstance().getRawGameVersion());
+    public static final String CURRENT_VERSION = FabricLoader.getInstance().getModContainer("minecraft").orElseThrow().getMetadata().getVersion().getFriendlyString();
 
     public static boolean isVersion(String version) {
         return CURRENT_VERSION.equals(version);
@@ -49,7 +48,8 @@ public class VersionHelper {
     }
 
     public static String[] parseVersion(String version) {
-        String[] split = version.split("\\.");
+        String[] preSplit = version.split("-alpha");
+        String[] split = preSplit[0].split("\\.");
         if (split.length == 2) {
             String[] parsed = new String[3];
             parsed[0] = split[0];

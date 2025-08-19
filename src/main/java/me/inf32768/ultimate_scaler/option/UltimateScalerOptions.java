@@ -2,16 +2,21 @@ package me.inf32768.ultimate_scaler.option;
 
 import me.inf32768.ultimate_scaler.UltimateScaler;
 import me.inf32768.ultimate_scaler.shadowed.com.moandjiezana.toml.Toml;
+import me.inf32768.ultimate_scaler.util.RegistryAccessor;
 import me.inf32768.ultimate_scaler.util.VersionHelper;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Objects;
 
 public final class UltimateScalerOptions {
     //Don't let anyone instantiate this class
@@ -19,7 +24,7 @@ public final class UltimateScalerOptions {
 
     public static ConfigImpl config;
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("ultimate_scaler.toml");
-    public static final int CONFIG_VERSION = 2;
+    public static final int CONFIG_VERSION = 3;
 
     public static class ConfigImpl {
         public BigDecimal[] globalBigDecimalOffset = {BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO};
@@ -36,6 +41,8 @@ public final class UltimateScalerOptions {
         public boolean fixEndRings = false;
         public boolean fixChunkGenerationOutOfBound = true;
         public boolean expandDatapackValueRange = true;
+        public boolean expandWorldBorder = true;
+        public boolean fixMineshaftCannotGenerate = true;
         public boolean replaceDefaultFluid = false;
         public String replaceDefaultFluidBlock = "minecraft:air";
         public boolean replaceUndergroundLava = false;
@@ -61,7 +68,34 @@ public final class UltimateScalerOptions {
             }
             config = new ConfigImpl();
         } else {
-            config = new Toml().read(CONFIG_PATH.toFile()).to(ConfigImpl.class);
+            try {
+                config = new Toml().read(CONFIG_PATH.toFile()).to(ConfigImpl.class);
+            } catch (Exception e) {
+                UltimateScaler.LOGGER.error("[Ultimate Scaler] Failed to load config file, resetting to default values: {}", e.getMessage());
+                config = new ConfigImpl();
+                saveConfig();
+                return;
+            }
+            try {
+                for (Field entry : ConfigImpl.class.getFields()) {
+                    if (entry.get(config) == null) {
+                        UltimateScaler.LOGGER.error("[Ultimate Scaler] Failed to load config entry, resetting to default value: {}", entry.getName());
+                        entry.set(config, ConfigImpl.class.getField(entry.getName()).get(new ConfigImpl()));
+                    }
+                }
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+                Objects.requireNonNull(RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceDefaultFluidBlock)));
+                Objects.requireNonNull(RegistryAccessor.get(Registries.BLOCK, Identifier.of(config.replaceUndergroundLavaBlock)));
+            } catch (NullPointerException e) {
+                UltimateScaler.LOGGER.error("[Ultimate Scaler] Failed to load block, resetting to default values: {}", e.getMessage());
+                ConfigManager.writeEntry(CONFIG_PATH, "replaceDefaultFluidBlock", "minecraft:air", null);
+                ConfigManager.writeEntry(CONFIG_PATH, "replaceUndergroundLavaBlock", "minecraft:air", null);
+                config.replaceDefaultFluidBlock = "minecraft:air";
+                config.replaceUndergroundLavaBlock = "minecraft:air";
+            }
         }
     }
 
@@ -98,9 +132,11 @@ public final class UltimateScalerOptions {
         ConfigManager.writeEntry(CONFIG_PATH, "bigIntegerRewrite", config.bigIntegerRewrite, new String[] {Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite").getString(), Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.1").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.2").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.3").getString() + Text.translatable("ultimate_scaler.options.worldgen.bigIntegerRewrite.tooltip.4").getString()});
         ConfigManager.writeEntry(CONFIG_PATH, "fixEndRings", config.fixEndRings, new String[] {Text.translatable("ultimate_scaler.options.worldgen.fixEndRings").getString(), Text.translatable("ultimate_scaler.options.worldgen.fixEndRings.tooltip").getString()});
         if (VersionHelper.isVersionAtLeast("1.21.2")) {
-            ConfigManager.writeEntry(CONFIG_PATH, "fixChunkGenerationOutOfBound", config.fixChunkGenerationOutOfBound, new String[] {Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound").getString(), Text.translatable("ultimate_scaler.options.fix.chunkGenerationOutOfBound.tooltip").getString()});
+            ConfigManager.writeEntry(CONFIG_PATH, "fixChunkGenerationOutOfBound", config.fixChunkGenerationOutOfBound, new String[] {Text.translatable("ultimate_scaler.options.tweaks.fixChunkGenerationOutOfBound").getString(), Text.translatable("ultimate_scaler.options.tweaks.fixChunkGenerationOutOfBound.tooltip").getString()});
         }
-        ConfigManager.writeEntry(CONFIG_PATH, "expandDatapackValueRange", config.expandDatapackValueRange, new String[] {Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange").getString(), Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.1").getString() + Text.translatable("ultimate_scaler.options.fix.expandDatapackValueRange.tooltip.2").getString()});
+        ConfigManager.writeEntry(CONFIG_PATH, "expandWorldBorder", config.expandWorldBorder, new String[] {Text.translatable("ultimate_scaler.options.tweaks.expandWorldBorder").getString(), Text.translatable("ultimate_scaler.options.tweaks.expandWorldBorder.tooltip").getString()});
+        ConfigManager.writeEntry(CONFIG_PATH, "expandDatapackValueRange", config.expandDatapackValueRange, new String[] {Text.translatable("ultimate_scaler.options.tweaks.expandDatapackValueRange").getString(), Text.translatable("ultimate_scaler.options.tweaks.expandDatapackValueRange.tooltip").getString() + Text.translatable("ultimate_scaler.options.require_restart").getString()});
+        ConfigManager.writeEntry(CONFIG_PATH, "fixMineshaftCannotGenerate", config.fixMineshaftCannotGenerate, new String[] {Text.translatable("ultimate_scaler.options.tweaks.fixMineshaftCannotGenerate").getString(), Text.translatable("ultimate_scaler.options.tweaks.fixMineshaftCannotGenerate.tooltip").getString()});
         ConfigManager.writeEntry(CONFIG_PATH, "publicTerrainPos", config.publicTerrainPos, new String[] {Text.translatable("ultimate_scaler.options.server.publicTerrainPos").getString()});
     }
 

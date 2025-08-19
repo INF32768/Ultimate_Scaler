@@ -6,24 +6,39 @@
   "mixins": [
     "MixinAbstractChunkHolder",
     "MixinDensityFunctionTypes",
-    "MixinEndIslands",
-    "MixinInterpolatedNoiseSampler",
-    "MixinNoiseChunkGenerator",
-    "MixinNoiseSampler",
+    "MixinMineshaftPart",
     "MixinOctavePerlinNoiseSampler",
-    "MixinShift",
-    "MixinShiftA",
-    "MixinShiftB",
-    "MixinShiftedNoiseSampler",
-    "MixinWeirdScaledSampler",
-    "MixinYClampedGradient"
+    "border.IMixinWorldView",
+    "border.MixinChunkPos",
+    "border.MixinEntity",
+    "border.MixinEntityBefore1_21_2",
+    "border.MixinForceLoadCommand",
+    "border.MixinMinecraftServer",
+    "border.MixinPlayerEntity",
+    "border.MixinServerPlayNetworkHandler",
+    "border.MixinServerPropertiesHandler",
+    "border.MixinWorld",
+    "border.MixinWorldBorder",
+    "border.MixinWorldBorderCommand",
+    "border.MixinWorldBorderProperties",
+    "offset.MixinEndIslands",
+    "offset.MixinInterpolatedNoiseSampler",
+    "offset.MixinNoiseChunkGenerator",
+    "offset.MixinNoiseSampler",
+    "offset.MixinShift",
+    "offset.MixinShiftA",
+    "offset.MixinShiftB",
+    "offset.MixinShiftedNoiseSampler",
+    "offset.MixinWeirdScaledSampler",
+    "offset.MixinYClampedGradient"
   ],
   "client": [
+    "MixinChunkGenerationStatsDebugHudEntry",
     "MixinDebugHud",
     "MixinTitleScreen"
   ],
   "injectors": {
     "defaultRequire": 1
   },
-  "plugin" : "me.inf32768.ultimate_scaler.mixins.MixinConfigPlugin"
+  "plugin": "me.inf32768.ultimate_scaler.MixinConfigPlugin"
 }

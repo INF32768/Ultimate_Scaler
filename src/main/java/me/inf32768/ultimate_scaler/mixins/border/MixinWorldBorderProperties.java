@@ -1,0 +1,21 @@
+package me.inf32768.ultimate_scaler.mixins.border;
+
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.border.WorldBorder;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
+
+import static me.inf32768.ultimate_scaler.option.UltimateScalerOptions.config;
+
+@Mixin(WorldBorder.Properties.class)
+public abstract class MixinWorldBorderProperties {
+    @Redirect(method = "fromDynamic", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;clamp(DDD)D"))
+    private static double modifyClamp(double value, double min, double max) {
+        if (config.expandWorldBorder) {
+            return value;
+        } else {
+            return MathHelper.clamp(value, min, max);
+        }
+    }
+}

@@ -10,7 +10,7 @@ group = project.maven_group
 String changelogVal = project.changelog
 
 curseforge {
-    apiKey = System.getenv("CURSEFORGE_API_KEY") ?: ""
+    apiKey = System.getenv("CURSEFORGE_API_KEY") ?: "ef49c5a2-abe6-4235-b8b7-a5f6e085f21f"
     project {
         id = '1323296'
         changelogType = 'markdown'
@@ -30,8 +30,9 @@ curseforge {
             requiredDependency "fabric-api"
             optionalDependency "cloth-config"
         }
+        mainArtifact remapJar
+
         afterEvaluate {
-            mainArtifact remapJar
             uploadTask.dependsOn remapJar
         }
     }

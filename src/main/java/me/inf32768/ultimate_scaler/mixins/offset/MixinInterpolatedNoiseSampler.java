@@ -1,4 +1,4 @@
-package me.inf32768.ultimate_scaler.mixins;
+package me.inf32768.ultimate_scaler.mixins.offset;
 
 import me.inf32768.ultimate_scaler.util.Util;
 import net.minecraft.util.math.Direction;

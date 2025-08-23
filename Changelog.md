@@ -140,3 +140,17 @@
 ### 漏洞修复 | Bug Fixes
 
 - 修复了上一版本未指定Minecraft版本的问题。 | Fixed that the previous version did not specify the Minecraft version.
+
+## 0.3.3.1 - 2025-8-23
+
+### 改进 | Improvements
+
+- 把`MixinAbstractChunkHolder`和`MixinMineshaftPart`两个类移动到`fixing`包中。 | Moved `MixinAbstractChunkHolder` and `MixinMineshaftPart` two classes to the `fixing` package.
+- 把`shadowed`包移动到`src\main\java`目录下。 | Moved the `shadowed` package to the `src\main\java` directory.
+
+### 漏洞修复 | Bug Fixes
+
+- 修复了在1.21.2以上版本中，X/Z坐标超过±30000512或Y坐标超过±20000000的实体，在加载时会被限制到此位置的问题。 | Fixed that entities with X/Z coordinates beyond ±30000512 or Y coordinates beyond ±20000000 in versions 1.21.2 and above, will be restricted to this position when loading.
+- 在根目录下添加了`LICENSE-toml4j`文件（很抱歉之前因为疏忽没有添加）。 | Added the `LICENSE-toml4j` file to the root directory (sorry for missing this earlier).
+- 在`README.md`中添加了对上述文件的引用。 | Added a reference to the above files in `README.md`.
+- 回退了0.3.0-pre1对`toml4j`库的误更改。 | Reverted the change to `toml4j` library in 0.3.0-pre1.

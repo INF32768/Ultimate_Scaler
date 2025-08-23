@@ -25,6 +25,7 @@ public final class MixinConfigPlugin implements IMixinConfigPlugin {
             if (mixinClassName.contains("MixinEntityBefore1_21_2")) return false;
         } else {
             if (mixinClassName.contains("MixinAbstractChunkHolder")) return false;
+            if (mixinClassName.contains("MixinEntityAfter1_21_2")) return false;
         }
 
         if (VersionHelper.isVersionAtLeast("1.21.9")) {

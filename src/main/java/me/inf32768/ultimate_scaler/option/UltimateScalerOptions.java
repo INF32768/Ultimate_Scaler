@@ -1,7 +1,6 @@
 package me.inf32768.ultimate_scaler.option;
 
 import me.inf32768.ultimate_scaler.UltimateScaler;
-import me.inf32768.ultimate_scaler.shadowed.com.moandjiezana.toml.Toml;
 import me.inf32768.ultimate_scaler.util.RegistryAccessor;
 import me.inf32768.ultimate_scaler.util.VersionHelper;
 import net.fabricmc.loader.api.FabricLoader;
@@ -9,6 +8,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
+import shadowed.com.moandjiezana.toml.Toml;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

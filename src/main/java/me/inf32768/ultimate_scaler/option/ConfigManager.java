@@ -3,7 +3,7 @@
 */
 package me.inf32768.ultimate_scaler.option;
 
-import me.inf32768.ultimate_scaler.shadowed.com.moandjiezana.toml.Toml;
+import shadowed.com.moandjiezana.toml.Toml;
 
 import java.io.IOException;
 import java.nio.file.Files;

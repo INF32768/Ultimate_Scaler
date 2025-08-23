@@ -3,7 +3,7 @@ skip_tags: true
 clone_depth: 1
 environment:
   JAVA_HOME: C:\Program Files\Java\jdk21
-  VERSION: 0.3.3-1.21
+  VERSION: 0.3.3.1-1.21
   RELEASE_TYPE: release
   MODRINTH_TOKEN:
     secure: TsbufWPo0KHWJvMF45poicdUr9g5333TCoJnOxfhD5kH7oM7zkboVn2ilHXVKdrIf8/S6GAGlUrsy2JRA/pPcFA+ela442QsFq/dzSrNuYQ= #有效期至2025-9-11
@@ -30,7 +30,7 @@ deploy:
   - provider: GitHub
     tag: v$(VERSION)
     release: $(VERSION)
-    description: '## 0.3.3 - 2025-8-19\n\n### 新特性 | New Features\n\n- 新增了扩展世界边界的功能。 | Added the ability to extend the world border.\n- 新增了修复废弃矿井在极大坐标下无法生成导致游戏崩溃的功能。 | Added the ability to fix the crash caused by generating mineshafts in extremely large coordinates.\n- 移植到1.21.9（25w33a）。 | Ported to 1.21.9 (25w33a).\n- 在`README.md`中添加了显示兼容版本的徽章。 | Added a badge to show compatible versions in `README.md`.\n\n### 改进 | Improvements\n\n- 不再要求Fabric Loader的版本高于0.17.0。 | No longer requires Fabric Loader version higher than 0.17.0.\n- 整理了Mixin类。 | Organized Mixin classes.\n- 把“‘修复’ 选项”更改为“实用调整”，并将“修复‘末地环’”功能移入。 | Changed "Fix option" to "Useful tweaks", and moved the "Fix End Rings" feature into it.\n- 升级构建环境到Fabric Loom 1.11-SNAPSHOT。 | Upgraded build environment to Fabric Loom 1.11-SNAPSHOT.\n- 现在使用accessWidener来访问内部protected类。 | Now using accessWidener to access internal protected classes.\n- 配置文件版本号现在是3。 | The configuration file version number is now 3.\n- 现在使用Makedown的“任务列表”功能来管理更新计划。 | Now using the "Task List" feature of Makedown to manage the update plan.\n\n### 漏洞修复 | Bug Fixes\n\n- 修复了上一版本未指定Minecraft版本的问题。 | Fixed that the previous version did not specify the Minecraft version.'
+    description: '## 0.3.3.1 - 2025-8-23\n\n### 改进 | Improvements\n\n- 把`MixinAbstractChunkHolder`和`MixinMineshaftPart`两个类移动到`fixing`包中。 | Moved `MixinAbstractChunkHolder` and `MixinMineshaftPart` two classes to the `fixing` package.\n- 把`shadowed`包移动到`src\main\java`目录下。 | Moved the `shadowed` package to the `src\main\java` directory.\n\n### 漏洞修复 | Bug Fixes\n\n- 修复了在1.21.2以上版本中，X/Z坐标超过±30000512或Y坐标超过±20000000的实体，在加载时会被限制到此位置的问题。 | Fixed that entities with X/Z coordinates beyond ±30000512 or Y coordinates beyond ±20000000 in versions 1.21.2 and above, will be restricted to this position when loading.\n- 在根目录下添加了`LICENSE-toml4j`文件（很抱歉之前因为疏忽没有添加）。 | Added the `LICENSE-toml4j` file to the root directory (sorry for missing this earlier).\n- 在`README.md`中添加了对上述文件的引用。 | Added a reference to the above files in `README.md`.\n- 回退了0.3.0-pre1对`toml4j`库的误更改。 | Reverted the change to `toml4j` library in 0.3.0-pre1.'
     auth_token:
       secure: MuYLGwuMDMlX3bB/PQL+ww4cs9Mmc2Nb0I2L4Ps2+GASo/K26MEUbFY1UVIgS2HR #有效期至2025-9-8
     artifact: UltimateScaler-$(VERSION).jar
